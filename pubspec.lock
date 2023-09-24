@@ -78,14 +78,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_inappwebview:
-    dependency: "direct main"
-    description:
-      name: flutter_inappwebview
-      sha256: f73505c792cf083d5566e1a94002311be497d984b5607f25be36d685cf6361cf
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.7.2+3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -152,6 +144,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.0"
+  nfc_emulator:
+    dependency: "direct main"
+    description:
+      name: nfc_emulator
+      sha256: "08a7cd99fa75d4129f49ded8d6a79565f71d376fd66b6211766301e0d1a31fa6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0-nullsafety.0"
   path:
     dependency: transitive
     description:
