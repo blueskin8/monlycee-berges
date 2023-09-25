@@ -47,7 +47,7 @@ class MyHomePageState extends State<Home> with TickerProviderStateMixin {
           Icons.credit_card,
           Icons.credit_score,
           Icons.open_in_browser,
-          Icons.cutler
+          Icons.restaurant,
           Icons.settings
         ],
         tabSize: 50,
