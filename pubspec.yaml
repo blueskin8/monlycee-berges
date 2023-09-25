@@ -36,6 +36,7 @@ dependencies:
   fluttertoast: ^8.2.2
   webview_flutter: ^4.2.4
   nfc_emulator: ^2.0.0-nullsafety.0
+  nfc_manager: ^3.3.0
 
 dev_dependencies:
   flutter_test:

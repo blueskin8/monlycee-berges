@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 import 'package:motion_tab_bar_v2/motion-tab-controller.dart';
 import '../pages/HomePage.dart';
+import '../pages/PassPage.dart';
 import '../pages/SettingsPage.dart';
 import '../pages/EntPage.dart';
 
@@ -70,6 +71,7 @@ class MyHomePageState extends State<Home> with TickerProviderStateMixin {
           MainPageContentComponent(
               title: "Emulation du Pass'Région en cours",
               controller: _motionTabBarController!),
+          const PassPage(),
           ENTPage(),
           SettingsPage(),
         ],
