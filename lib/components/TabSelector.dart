@@ -15,7 +15,7 @@ class MyHomePageState extends State<Home> with TickerProviderStateMixin {
     super.initState();
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,
-      length: 4,
+      length: 5,
       vsync: this,
     );
   }

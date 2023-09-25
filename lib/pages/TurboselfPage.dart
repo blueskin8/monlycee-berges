@@ -29,9 +29,7 @@ class TurboselfPage extends StatelessWidget {
     return FutureBuilder(
       future: getPrefsInstance(),
       builder: (context, snapshot) {
-        return Scaffold(
-          body: WebViewWidget(controller: controller),
-        );
+        return WebViewWidget(controller: controller);
       },
     );
   }
