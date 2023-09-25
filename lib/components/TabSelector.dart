@@ -14,7 +14,7 @@ class MyHomePageState extends State<Home> with TickerProviderStateMixin {
     super.initState();
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,
-      length: 3,
+      length: 4,
       vsync: this,
     );
   }
@@ -37,11 +37,13 @@ class MyHomePageState extends State<Home> with TickerProviderStateMixin {
         useSafeArea: true,
         labels: const [
           "Pass'Région",
+          "PassPage",
           "ENT",
           "Paramètres"
         ],
         icons: const [
           Icons.credit_card,
+          Icons.credit_score,
           Icons.open_in_browser,
           Icons.settings
         ],
@@ -71,7 +73,7 @@ class MyHomePageState extends State<Home> with TickerProviderStateMixin {
           MainPageContentComponent(
               title: "Emulation du Pass'Région en cours",
               controller: _motionTabBarController!),
-          const PassPage(),
+          PassPage(),
           ENTPage(),
           SettingsPage(),
         ],
