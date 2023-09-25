@@ -5,6 +5,7 @@ import '../pages/HomePage.dart';
 import '../pages/PassPage.dart';
 import '../pages/SettingsPage.dart';
 import '../pages/EntPage.dart';
+import '../pages/TurboselfPage.dart';
 
 class MyHomePageState extends State<Home> with TickerProviderStateMixin {
   MotionTabBarController? _motionTabBarController;
@@ -39,12 +40,14 @@ class MyHomePageState extends State<Home> with TickerProviderStateMixin {
           "Pass'Région",
           "PassPage",
           "ENT",
+          "Turboself",
           "Paramètres"
         ],
         icons: const [
           Icons.credit_card,
           Icons.credit_score,
           Icons.open_in_browser,
+          Icons.cutler
           Icons.settings
         ],
         tabSize: 50,
@@ -75,6 +78,7 @@ class MyHomePageState extends State<Home> with TickerProviderStateMixin {
               controller: _motionTabBarController!),
           PassPage(),
           ENTPage(),
+          TurboselfPage(),
           SettingsPage(),
         ],
       ),
