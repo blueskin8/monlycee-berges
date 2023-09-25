@@ -68,7 +68,7 @@ class PassPageState extends State<PassPage> {
     NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
       result.value = tag.data;
       NfcManager.instance.stopSession();
-    });""
+    });
   }
 
   void _ndefWrite() {
