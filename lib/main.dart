@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:monlycee/pages/HomePage.dart';
+import 'package:monlycee/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
