@@ -15,7 +15,7 @@ class SettingsPage extends StatelessWidget {
 
   SettingsPage({Key? key}) : super(key: key);
 
-  late bool autoconnexionENT = false;
+  bool autoconnexionENT = false;
 
   Future<void> getPrefsInstance() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
