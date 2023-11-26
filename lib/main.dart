@@ -20,7 +20,7 @@ class MonLycee extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Home(title: 'Mon lycée'),
+      home: const HomePage(),
     );
   }
 }

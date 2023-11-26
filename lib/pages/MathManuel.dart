@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../components/BottomNavBar.dart';
 
-class TurboselfPage extends StatelessWidget {
+class MathManuelPage extends StatelessWidget {
   final WebViewController controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setNavigationDelegate(
@@ -17,9 +17,9 @@ class TurboselfPage extends StatelessWidget {
         },
       ),
     )
-    ..loadRequest(Uri.parse("https://espacenumerique.turbo-self.com/ReserverRepas.aspx"));
+    ..loadRequest(Uri.parse("https://www.calameo.com/read/0005967290f026f1d6ada"));
 
-  TurboselfPage({Key? key}) : super(key: key);
+  MathManuelPage({Key? key}) : super(key: key);
 
   Future<void> getPrefsInstance() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -31,8 +31,8 @@ class TurboselfPage extends StatelessWidget {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        backgroundColor: Color(0xff2a3961),
-        bottomNavigationBar: BottomNavBar(),
+        backgroundColor: const Color(0xff2a3961),
+        bottomNavigationBar: const BottomNavBar(),
         body: FutureBuilder(
           future: getPrefsInstance(),
           builder: (context, snapshot) {
