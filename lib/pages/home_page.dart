@@ -108,14 +108,17 @@ class HomePage extends StatelessWidget {
                             child: Row(
                               children: [
                                 Image.asset("assets/turboself.png", width: 40,),
-                                Padding(padding: const EdgeInsets.only(left: 12), child: Text(
-                                  "Turboself",
-                                  style: TextStyle(
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 12),
+                                  child: Text(
+                                    "Turboself",
+                                    style: TextStyle(
                                       fontFamily: "FeixenVariable",
                                       color: Colors.white,
                                       fontSize: getPercentage(context, "w5")
+                                    ),
                                   ),
-                                ),)
+                                )
                               ],
                             ),
                           ),

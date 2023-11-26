@@ -48,11 +48,11 @@ class BottomNavBar extends StatelessWidget {
               );
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.functions, color: Colors.white),
-            onPressed: () {
-            },
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.functions, color: Colors.white),
+          //   onPressed: () {
+          //   },
+          // ),
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
             onPressed: () {

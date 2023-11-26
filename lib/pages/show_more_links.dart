@@ -6,7 +6,7 @@ import 'package:monlycee/other/get_percentage.dart';
 import 'package:monlycee/pages/ent_page.dart';
 import 'package:monlycee/pages/turboself_page.dart';
 import 'package:monlycee/pages/settings_page.dart';
-import 'package:monlycee/pages/alomath_page.dart';
+// import 'package:monlycee/pages/alomath_page.dart';
 import 'package:monlycee/pages/mtag_page.dart';
 
 class MoreLinksPage extends StatelessWidget {
@@ -170,7 +170,7 @@ class MoreLinksPage extends StatelessWidget {
                           onPressed: () => {
                             Navigator.push(
                                 context,
-                                PageRouteBuilder(pageBuilder: (_, __, ___) => SettingsPage())
+                                PageRouteBuilder(pageBuilder: (_, __, ___) => const SettingsPage())
                             )
                           },
                           child: Row(
@@ -226,39 +226,39 @@ class MoreLinksPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 7, left: 7),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.only(left: 20),
-                              backgroundColor: const Color(0xff43497D),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  side: const BorderSide(color: Colors.white, width: 1)
-                              ),
-                              fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
-                          ),
-                          onPressed: () => {
-                            Navigator.push(
-                                context,
-                                PageRouteBuilder(pageBuilder: (_, __, ___) =>AlomathPage())
-                            )
-                          },
-                          child: Row(
-                            children: [
-                              Image.asset("assets/alomath.png", width: 40,),
-                              Padding(padding: const EdgeInsets.only(left: 12), child: Text(
-                                "Alomath",
-                                style: TextStyle(
-                                    fontFamily: "FeixenVariable",
-                                    color: Colors.white,
-                                    fontSize: getPercentage(context, "w5")
-                                ),
-                              ),)
-                            ],
-                          ),
-                        ),
-                      )
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 7, left: 7),
+                      //   child: ElevatedButton(
+                      //     style: ElevatedButton.styleFrom(
+                      //         padding: const EdgeInsets.only(left: 20),
+                      //         backgroundColor: const Color(0xff43497D),
+                      //         shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(20.0),
+                      //             side: const BorderSide(color: Colors.white, width: 1)
+                      //         ),
+                      //         fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                      //     ),
+                      //     onPressed: () => {
+                      //       Navigator.push(
+                      //           context,
+                      //           PageRouteBuilder(pageBuilder: (_, __, ___) =>AlomathPage())
+                      //       )
+                      //     },
+                      //     child: Row(
+                      //       children: [
+                      //         Image.asset("assets/alomath.png", width: 40,),
+                      //         Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                      //           "Alomath",
+                      //           style: TextStyle(
+                      //               fontFamily: "FeixenVariable",
+                      //               color: Colors.white,
+                      //               fontSize: getPercentage(context, "w5")
+                      //           ),
+                      //         ),)
+                      //       ],
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ), // Ligne de boutons 3
 
