@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
+import 'package:package_info/package_info.dart';
 import 'dart:convert';
 
 class SettingsPage extends StatefulWidget {
@@ -20,6 +23,8 @@ class _SettingsPageState extends State<SettingsPage> {
   final TextEditingController _controllerMessage = TextEditingController();
   final TextEditingController _controllerAuthor = TextEditingController();
 
+  late String version;
+
   bool autoconnexionENT = false;
 
   @override
@@ -32,19 +37,23 @@ class _SettingsPageState extends State<SettingsPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final usernameENT = prefs.get("usernameENT");
     final pwdENT = prefs.get("pwdENT");
+
+    await PackageInfo.fromPlatform().then((value) => version = value.version);
+
     autoconnexionENT = prefs.getBool("autoconnexionENT") ?? false;
     _controllerUsername.text = usernameENT?.toString() ?? '';
     _controllerPwd.text = pwdENT?.toString() ?? '';
   }
 
-  Future<http.Response> sendMessage() {
+  Future<http.Response> sendMessage() async {
     final String author = _controllerAuthor.text;
     final String message = _controllerMessage.text;
-    return http.post(
-        Uri.parse(
-            "https://discord.com/api/webhooks/1178253911409295380/L24_QviyX6Yuw0GE4yB0WlMCdoKwjVN3N4jKagwbR31vEdWsiQyViP-qdyXVZOUVP4Tr"),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({
+    var res = await http.post(
+      Uri.parse(
+          "https://discord.com/api/webhooks/1178253911409295380/L24_QviyX6Yuw0GE4yB0WlMCdoKwjVN3N4jKagwbR31vEdWsiQyViP-qdyXVZOUVP4Tr"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(
+        {
           "embeds": [
             {
               "title": "Nouveau report",
@@ -53,7 +62,12 @@ class _SettingsPageState extends State<SettingsPage> {
               "author": {"name": author}
             }
           ]
-        }));
+        }
+      )
+    );
+    _controllerMessage.text = "";
+    _controllerAuthor.text = "";
+    return res;
   }
 
   void setBool(value) async {
@@ -226,6 +240,15 @@ class _SettingsPageState extends State<SettingsPage> {
                               })
                             }
                         },
+                      ),
+                      SizedBox(height: getPercentage(context, "h2")),
+                      Text(
+                        "MonLycée ▪ Version v$version",
+                        style: TextStyle(
+                          color: Colors.white30,
+                          fontFamily: "FeixenVariable",
+                          fontSize: getPercentage(context, "w4")
+                        ),
                       ),
                       SizedBox(height: getPercentage(context, "h5"))
                     ],
