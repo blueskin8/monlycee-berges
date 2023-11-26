@@ -37,6 +37,9 @@ dependencies:
   nfc_manager: ^3.3.0
   fluttertoast: ^8.2.2
   http: ^1.1.0
+  ota_update: ^6.0.0
+  github: ^9.20.0
+  package_info: ^2.0.2
 
 dev_dependencies:
   flutter_test:
