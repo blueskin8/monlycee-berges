@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:monlycee/pages/HomePage.dart';
-import 'MathManuel.dart';
-import '../components/BottomNavBar.dart';
-import '../other/getPercentage.dart';
-import 'EntPage.dart';
-import 'TurboselfPage.dart';
-import 'SettingsPage.dart';
-import 'AlomathPage.dart';
-import 'MTagPage.dart';
+import 'package:monlycee/pages/MathManuel.dart';
+import 'package:monlycee/components/BottomNavBar.dart';
+import 'package:monlycee/other/getPercentage.dart';
+import 'package:monlycee/pages/EntPage.dart';
+import 'package:monlycee/pages/TurboselfPage.dart';
+import 'package:monlycee/pages/SettingsPage.dart';
+import 'package:monlycee/pages/AlomathPage.dart';
+import 'package:monlycee/pages/MTagPage.dart';
 
 class MoreLinksPage extends StatelessWidget {
   const MoreLinksPage({super.key});

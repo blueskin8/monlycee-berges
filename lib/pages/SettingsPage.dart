@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../components/BottomNavBar.dart';
-import '../other/getPercentage.dart';
+import 'package:monlycee/components/BottomNavBar.dart';
+import 'package:monlycee/other/getPercentage.dart';
 import 'dart:convert';
 
 class SettingsPage extends StatelessWidget {

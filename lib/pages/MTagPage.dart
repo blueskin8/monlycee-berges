@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../components/BottomNavBar.dart';
+import 'package:monlycee/components/BottomNavBar.dart';
 
 class MTagPage extends StatelessWidget {
   final WebViewController controller = WebViewController()
