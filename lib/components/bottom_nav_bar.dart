@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../pages/SettingsPage.dart';
-import '../pages/TurboselfPage.dart';
-import '../pages/HomePage.dart';
-import '../pages/EntPage.dart';
+import 'package:monlycee/pages/settings_page.dart';
+import 'package:monlycee/pages/turboself_page.dart';
+import 'package:monlycee/pages/home_page.dart';
+import 'package:monlycee/pages/ent_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
@@ -21,7 +21,7 @@ class BottomNavBar extends StatelessWidget {
               Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => HomePage()
+                      pageBuilder: (_, __, ___) => const HomePage()
                   )
               );
             },

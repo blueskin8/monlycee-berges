@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:monlycee/components/BottomNavBar.dart';
+import 'package:monlycee/components/bottom_nav_bar.dart';
 
-class MTagPage extends StatelessWidget {
+class AlomathPage extends StatelessWidget {
   final WebViewController controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setNavigationDelegate(
@@ -17,13 +16,9 @@ class MTagPage extends StatelessWidget {
         },
       ),
     )
-    ..loadRequest(Uri.parse("https://www.tag.fr/8-horaires.htm"));
+    ..loadRequest(Uri.parse("https://alomath.fr/connexion.php"));
 
-  MTagPage({Key? key}) : super(key: key);
-
-  Future<void> getPrefsInstance() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-  }
+  AlomathPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +28,7 @@ class MTagPage extends StatelessWidget {
       home: Scaffold(
         backgroundColor: const Color(0xff2a3961),
         bottomNavigationBar: const BottomNavBar(),
-        body: FutureBuilder(
-          future: getPrefsInstance(),
-          builder: (context, snapshot) {
-            return WebViewWidget(controller: controller);
-          },
-        ),
+        body: WebViewWidget(controller: controller)
       ),
     );
   }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:monlycee/pages/MTagPage.dart';
-import 'package:monlycee/pages/EntPage.dart';
-import 'package:monlycee/pages/TurboselfPage.dart';
-import 'package:monlycee/pages/SettingsPage.dart';
-import 'package:monlycee/pages/ShowMoreLinks.dart';
-import 'package:monlycee/components/BottomNavBar.dart';
-import 'package:monlycee/other/getPercentage.dart';
+import 'package:monlycee/pages/mtag_page.dart';
+import 'package:monlycee/pages/ent_page.dart';
+import 'package:monlycee/pages/turboself_page.dart';
+import 'package:monlycee/pages/settings_page.dart';
+import 'package:monlycee/pages/show_more_links.dart';
+import 'package:monlycee/components/bottom_nav_bar.dart';
+import 'package:monlycee/other/get_percentage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

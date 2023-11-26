@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:monlycee/components/BottomNavBar.dart';
-import 'package:monlycee/other/getPercentage.dart';
+import 'package:monlycee/components/bottom_nav_bar.dart';
+import 'package:monlycee/other/get_percentage.dart';
 import 'dart:convert';
 
 class SettingsPage extends StatelessWidget {
@@ -15,7 +15,7 @@ class SettingsPage extends StatelessWidget {
 
   SettingsPage({Key? key}) : super(key: key);
 
-  bool autoconnexionENT = false;
+  late bool autoconnexionENT = false;
 
   Future<void> getPrefsInstance() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -47,6 +47,11 @@ class SettingsPage extends StatelessWidget {
         }
       )
     );
+  }
+
+  void setBool(value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("autoconnexionENT", value);
   }
 
   @override
@@ -95,10 +100,9 @@ class SettingsPage extends StatelessWidget {
                               )
                           ),
                           Checkbox(
-                            onChanged: (value) async {
+                            onChanged: (value) {
                               autoconnexionENT = value!;
-                              final SharedPreferences prefs = await SharedPreferences.getInstance();
-                              prefs.setBool("autoconnexionENT", value);
+                              setBool(value);
                               Navigator.push(
                                   context,
                                   PageRouteBuilder(
