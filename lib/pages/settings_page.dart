@@ -41,7 +41,8 @@ class _SettingsPageState extends State<SettingsPage> {
     final String author = _controllerAuthor.text;
     final String message = _controllerMessage.text;
     return http.post(
-        Uri.parse("https://discord.com/api/webhooks/1178253911409295380/L24_QviyX6Yuw0GE4yB0WlMCdoKwjVN3N4jKagwbR31vEdWsiQyViP-qdyXVZOUVP4Tr"),
+        Uri.parse(
+            "https://discord.com/api/webhooks/1178253911409295380/L24_QviyX6Yuw0GE4yB0WlMCdoKwjVN3N4jKagwbR31vEdWsiQyViP-qdyXVZOUVP4Tr"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
           "embeds": [
@@ -113,7 +114,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         ],
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width - 90,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 90,
                         child: TextField(
                           controller: _controllerUsername,
                           enabled: autoconnexionENT,
@@ -134,7 +138,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width - 90,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 90,
                         child: TextField(
                           controller: _controllerPwd,
                           style: const TextStyle(color: Colors.white),
@@ -166,7 +173,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width - 90,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 90,
                         child: TextField(
                           style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(
@@ -177,7 +187,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width - 90,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 90,
                         child: TextField(
                           style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(
@@ -199,10 +212,19 @@ class _SettingsPageState extends State<SettingsPage> {
                               fontFamily: "FeixenVariable",
                               fontSize: getPercentage(context, "w5")),
                         ),
-                        onPressed: () => {
-                          sendMessage().then((value) => {
-                            Fluttertoast.showToast(msg: "Message envoyé !")
-                          })
+                        onPressed: () =>
+                        {
+                          if(_controllerMessage.text == "" ||
+                              _controllerAuthor.text == "") {
+                            Fluttertoast.showToast(
+                                msg: "Vous devez préciser qui vous êtes et votre message.")
+                          } else
+                            {
+                              sendMessage().then((value) =>
+                              {
+                                Fluttertoast.showToast(msg: "Message envoyé !")
+                              })
+                            }
                         },
                       ),
                       SizedBox(height: getPercentage(context, "h5"))
