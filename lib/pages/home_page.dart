@@ -3,9 +3,9 @@ import 'package:monlycee/pages/mtag_page.dart';
 import 'package:monlycee/pages/ent_page.dart';
 import 'package:monlycee/pages/turboself_page.dart';
 import 'package:monlycee/pages/settings_page.dart';
-import 'package:monlycee/pages/show_more_links.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
+import 'package:monlycee/pages/math_manuel.dart';
 // import 'package:ota_update/ota_update.dart';
 // import 'package:package_info/package_info.dart';
 // import 'package:github/github.dart';
@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   bool updateAvailable = false;
+  bool showMore = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,35 +35,36 @@ class _HomePageState extends State<HomePage> {
                 bottomNavigationBar: const BottomNavBar(),
                 body: SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: getPercentage(context, "h13")),
-                            child: Text(
-                              "Mon lycée",
+                  child: SingleChildScrollView(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: getPercentage(context, "h13")),
+                              child: Text(
+                                "Mon lycée",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontFamily: "FeixenBold",
+                                    color: Colors.white,
+                                    fontSize: getPercentage(context, "w15")
+                                ),
+                              ),
+                            ), // Text Mon lycée
+                            Text(
+                              "Aristide Bergès",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: "FeixenBold",
+                                  fontFamily: "FeixenVariable",
+                                  fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: getPercentage(context, "w15")
+                                  fontSize: getPercentage(context, "h3")
                               ),
-                            ),
-                          ), // Text Mon lycée
-                          Text(
-                            "Aristide Bergès",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: "FeixenVariable",
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                                fontSize: getPercentage(context, "h3")
-                            ),
-                          ), // Text Aristide Bergès
-                          SizedBox(height: getPercentage(context, "h6")),
-                          /*if(updateAvailable) SizedBox(
+                            ), // Text Aristide Bergès
+                            SizedBox(height: getPercentage(context, "h6")),
+                            /*if(updateAvailable) SizedBox(
                             height: 25,
                             child: ElevatedButton(
                               onPressed: () async {
@@ -91,183 +93,263 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),*/
-                          SizedBox(height: getPercentage(context, "h2")),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 14),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 7, left: 7),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.only(left: 20),
-                                        backgroundColor: const Color(0xff43497D),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(20.0),
-                                            side: const BorderSide(color: Colors.white, width: 1)
-                                        ),
-                                        fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
-                                    ),
-                                    onPressed: () => {
-                                      Navigator.push(
-                                          context,
-                                          PageRouteBuilder(pageBuilder: (_, __, ___) => ENTPage())
-                                      )
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Image.asset("assets/BetterENT-logo.png", width: 40),
-                                        Padding(padding: const EdgeInsets.only(left: 12), child: Text(
-                                          "ENT",
-                                          style: TextStyle(
-                                              fontFamily: "FeixenVariable",
-                                              color: Colors.white,
-                                              fontSize: getPercentage(context, "w5")
+                            SizedBox(height: getPercentage(context, "h2")),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 14),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 7, left: 7),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          backgroundColor: const Color(0xff43497D),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20.0),
+                                              side: const BorderSide(color: Colors.white, width: 1)
                                           ),
-                                        ),)
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 7, left: 7),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.only(left: 20),
-                                        backgroundColor: const Color(0xff43497D),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(20.0),
-                                            side: const BorderSide(color: Colors.white, width: 1)
-                                        ),
-                                        fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
-                                    ),
-                                    onPressed: () => {
-                                      Navigator.push(
-                                          context,
-                                          PageRouteBuilder(pageBuilder: (_, __, ___) => TurboselfPage())
-                                      )
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Image.asset("assets/turboself.png", width: 40,),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 12),
-                                          child: Text(
-                                            "Turboself",
+                                          fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
+                                      onPressed: () => {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(pageBuilder: (_, __, ___) => ENTPage())
+                                        )
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset("assets/BetterENT-logo.png", width: 40),
+                                          Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                            "ENT",
                                             style: TextStyle(
                                                 fontFamily: "FeixenVariable",
                                                 color: Colors.white,
                                                 fontSize: getPercentage(context, "w5")
                                             ),
+                                          ),)
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 7, left: 7),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          backgroundColor: const Color(0xff43497D),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20.0),
+                                              side: const BorderSide(color: Colors.white, width: 1)
                                           ),
+                                          fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
+                                      onPressed: () => {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(pageBuilder: (_, __, ___) => TurboselfPage())
                                         )
-                                      ],
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset("assets/turboself.png", width: 40,),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 12),
+                                            child: Text(
+                                              "Turboself",
+                                              style: TextStyle(
+                                                  fontFamily: "FeixenVariable",
+                                                  color: Colors.white,
+                                                  fontSize: getPercentage(context, "w5")
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ), // Ligne de boutons 1
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 0),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 7, left: 7),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          backgroundColor: const Color(0xff43497D),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20.0),
+                                              side: const BorderSide(color: Colors.white, width: 1)
+                                          ),
+                                          fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
+                                      onPressed: () => {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(pageBuilder: (_, __, ___) => MTagPage())
+                                        )
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset("assets/mtag-logo.png", width: 40,),
+                                          Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                            "Horaires",
+                                            style: TextStyle(
+                                                fontFamily: "FeixenVariable",
+                                                color: Colors.white,
+                                                fontSize: getPercentage(context, "w5")
+                                            ),
+                                          ),)
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
-                          ), // Ligne de boutons 1
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 0),
-                            child: Row(
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 7, left: 7),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          backgroundColor: const Color(0xff43497D),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20.0),
+                                              side: const BorderSide(color: Colors.white, width: 1)
+                                          ),
+                                          fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
+                                      onPressed: () => {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(pageBuilder: (_, __, ___) => const SettingsPage())
+                                        )
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset("assets/cogs.png", width: 40,),
+                                          Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                            "Préférences",
+                                            style: TextStyle(
+                                                fontFamily: "FeixenVariable",
+                                                color: Colors.white,
+                                                fontSize: getPercentage(context, "w4")
+                                            ),
+                                          ),)
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ), // Ligne de boutons 2
+                            const SizedBox(height: 14),
+                            if(showMore) Column(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 7, left: 7),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.only(left: 20),
-                                        backgroundColor: const Color(0xff43497D),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(20.0),
-                                            side: const BorderSide(color: Colors.white, width: 1)
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 7, left: 7),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.only(left: 20),
+                                            backgroundColor: const Color(0xff43497D),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(20.0),
+                                                side: const BorderSide(color: Colors.white, width: 1)
+                                            ),
+                                            fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
                                         ),
-                                        fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
-                                    ),
-                                    onPressed: () => {
-                                      Navigator.push(
-                                          context,
-                                          PageRouteBuilder(pageBuilder: (_, __, ___) => MTagPage())
-                                      )
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Image.asset("assets/mtag-logo.png", width: 40,),
-                                        Padding(padding: const EdgeInsets.only(left: 12), child: Text(
-                                          "Horaires",
-                                          style: TextStyle(
-                                              fontFamily: "FeixenVariable",
-                                              color: Colors.white,
-                                              fontSize: getPercentage(context, "w5")
-                                          ),
-                                        ),)
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 7, left: 7),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.only(left: 20),
-                                        backgroundColor: const Color(0xff43497D),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(20.0),
-                                            side: const BorderSide(color: Colors.white, width: 1)
+                                        onPressed: () => {
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(pageBuilder: (_, __, ___) => MathManuelPage())
+                                          )
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Image.asset("assets/mathbook.png", width: 40,),
+                                            Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                              "Manuel",
+                                              style: TextStyle(
+                                                  fontFamily: "FeixenVariable",
+                                                  color: Colors.white,
+                                                  fontSize: getPercentage(context, "w5")
+                                              ),
+                                            ),)
+                                          ],
                                         ),
-                                        fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
                                     ),
-                                    onPressed: () => {
-                                      Navigator.push(
-                                          context,
-                                          PageRouteBuilder(pageBuilder: (_, __, ___) => const SettingsPage())
-                                      )
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Image.asset("assets/cogs.png", width: 40,),
-                                        Padding(padding: const EdgeInsets.only(left: 12), child: Text(
-                                          "Préférences",
-                                          style: TextStyle(
-                                              fontFamily: "FeixenVariable",
-                                              color: Colors.white,
-                                              fontSize: getPercentage(context, "w4")
-                                          ),
-                                        ),)
-                                      ],
-                                    ),
-                                  ),
-                                )
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(right: 7, left: 7),
+                                    //   child: ElevatedButton(
+                                    //     style: ElevatedButton.styleFrom(
+                                    //         padding: const EdgeInsets.only(left: 20),
+                                    //         backgroundColor: const Color(0xff43497D),
+                                    //         shape: RoundedRectangleBorder(
+                                    //             borderRadius: BorderRadius.circular(20.0),
+                                    //             side: const BorderSide(color: Colors.white, width: 1)
+                                    //         ),
+                                    //         fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                    //     ),
+                                    //     onPressed: () => {
+                                    //       Navigator.push(
+                                    //           context,
+                                    //           PageRouteBuilder(pageBuilder: (_, __, ___) =>AlomathPage())
+                                    //       )
+                                    //     },
+                                    //     child: Row(
+                                    //       children: [
+                                    //         Image.asset("assets/alomath.png", width: 40,),
+                                    //         Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                    //           "Alomath",
+                                    //           style: TextStyle(
+                                    //               fontFamily: "FeixenVariable",
+                                    //               color: Colors.white,
+                                    //               fontSize: getPercentage(context, "w5")
+                                    //           ),
+                                    //         ),)
+                                    //       ],
+                                    //     ),
+                                    //   ),
+                                    // )
+                                  ],
+                                ), // Ligne de boutons 3
+                                SizedBox(height: 14)
                               ],
                             ),
-                          ), // Ligne de boutons 2
-                          const SizedBox(height: 14),
-                          SizedBox(
-                            width: getPercentage(context, "w86") + 14,
-                            height: 25,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)
+                            SizedBox(
+                              width: getPercentage(context, "w86") + 14,
+                              height: 25,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8)
+                                    ),
+                                    backgroundColor: const Color(0xff43497D)
+                                ),
+                                onPressed: () => {
+                                  if(showMore) {
+                                    setState(() => showMore = false)
+                                  } else {
+                                    setState(() => showMore = true)
+                                  }
+                                },
+                                child: Text(
+                                  showMore ? "Afficher moins" : "Affichier plus",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "FeixenVariable",
                                   ),
-                                  backgroundColor: const Color(0xff43497D)
-                              ),
-                              onPressed: () => {
-                                Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const MoreLinksPage()))
-                              },
-                              child: const Text(
-                                "Afficher plus",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "FeixenVariable",
                                 ),
                               ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
                 )
             )
         );
