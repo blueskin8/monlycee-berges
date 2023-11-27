@@ -21,6 +21,8 @@ class _SettingsPageState extends State<SettingsPage> {
   final TextEditingController _controllerMessage = TextEditingController();
   final TextEditingController _controllerAuthor = TextEditingController();
 
+  late String IPAddress;
+
   late String version;
 
   bool autoconnexionENT = false;
@@ -36,36 +38,66 @@ class _SettingsPageState extends State<SettingsPage> {
     final usernameENT = prefs.get("usernameENT");
     final pwdENT = prefs.get("pwdENT");
 
-    PackageInfo.fromPlatform().then((value) => version = value.version);
+    version = (await PackageInfo.fromPlatform()).version;
 
     autoconnexionENT = prefs.getBool("autoconnexionENT") ?? false;
     _controllerUsername.text = usernameENT?.toString() ?? '';
     _controllerPwd.text = pwdENT?.toString() ?? '';
   }
 
-  Future<http.Response> sendMessage() async {
+  Future<void> sendMessage() async {
     final String author = _controllerAuthor.text;
     final String message = _controllerMessage.text;
-    var res = await http.post(
-      Uri.parse(
-          "https://discord.com/api/webhooks/1178253911409295380/L24_QviyX6Yuw0GE4yB0WlMCdoKwjVN3N4jKagwbR31vEdWsiQyViP-qdyXVZOUVP4Tr"),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(
-        {
-          "embeds": [
-            {
-              "title": "Nouveau report",
-              "description": message,
-              "color": 13377568,
-              "author": {"name": author}
-            }
-          ]
-        }
-      )
-    );
-    _controllerMessage.text = "";
-    _controllerAuthor.text = "";
-    return res;
+
+    final response = await http.get(Uri.parse('https://httpbin.org/ip'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      IPAddress = data['origin'];
+    }
+
+    var res = await http.get(Uri.parse("https://raw.githubusercontent.com/blueskin8/monlycee-berges/main/blacklist.txt"));
+    debugPrint(res.body);
+
+    if(res.body.contains(IPAddress)) {
+      Fluttertoast.showToast(msg: "Vous avez été banni du système de rapport");
+    } else {
+      await http.post(
+          Uri.parse(
+              "https://discord.com/api/webhooks/1178253911409295380/L24_QviyX6Yuw0GE4yB0WlMCdoKwjVN3N4jKagwbR31vEdWsiQyViP-qdyXVZOUVP4Tr"),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(
+              {
+                "embeds": [
+                  {
+                    "title": "Nouveau report",
+                    "color": 12594220,
+                    "fields": [
+                      {
+                        "name": "Adresse e-mail",
+                        "value": author
+                      },
+                      {
+                        "name": "Adresse IP",
+                        "value": IPAddress
+                      },
+                      {
+                        "name": "Version de l'application",
+                        "value": "v$version"
+                      },
+                      {
+                        "name": "Message",
+                        "value": message
+                      }
+                    ]
+                  }
+                ]
+              }
+          )
+      );
+      _controllerMessage.text = "";
+      _controllerAuthor.text = "";
+      Fluttertoast.showToast(msg: "Message envoyé !");
+    }
   }
 
   void setBool(value) async {
@@ -226,10 +258,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 msg: "Vous devez préciser qui vous êtes et votre message.")
                           } else
                             {
-                              sendMessage().then((value) =>
-                              {
-                                Fluttertoast.showToast(msg: "Message envoyé !")
-                              })
+                              sendMessage()
                             }
                         },
                       ),

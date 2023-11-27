@@ -220,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                                     onPressed: () => {
                                       Navigator.push(
                                           context,
-                                          PageRouteBuilder(pageBuilder: (_, __, ___) => SettingsPage())
+                                          PageRouteBuilder(pageBuilder: (_, __, ___) => const SettingsPage())
                                       )
                                     },
                                     child: Row(

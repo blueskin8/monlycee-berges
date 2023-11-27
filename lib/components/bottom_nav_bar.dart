@@ -32,7 +32,7 @@ class BottomNavBar extends StatelessWidget {
               Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => PassPage()
+                      pageBuilder: (_, __, ___) => const PassPage()
                   )
               );
             },
@@ -70,7 +70,7 @@ class BottomNavBar extends StatelessWidget {
               Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => SettingsPage()
+                      pageBuilder: (_, __, ___) => const SettingsPage()
                   )
               );
             },
