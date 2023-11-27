@@ -18,6 +18,9 @@ class _SettingsPageState extends State<SettingsPage> {
   final TextEditingController _controllerUsername = TextEditingController();
   final TextEditingController _controllerPwd = TextEditingController();
 
+  final TextEditingController _controllerUsernameSelf = TextEditingController();
+  final TextEditingController _controllerPwdSelf = TextEditingController();
+
   final TextEditingController _controllerMessage = TextEditingController();
   final TextEditingController _controllerAuthor = TextEditingController();
 
@@ -26,6 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
   late String version;
 
   bool autoconnexionENT = false;
+  bool autoconnexionSelf = false;
 
   @override
   void initState() {
@@ -37,12 +41,18 @@ class _SettingsPageState extends State<SettingsPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final usernameENT = prefs.get("usernameENT");
     final pwdENT = prefs.get("pwdENT");
+    final usernameSelf = prefs.get("usernameSelf");
+    final pwdSelf = prefs.get("pwdSelf");
 
     version = (await PackageInfo.fromPlatform()).version;
 
     autoconnexionENT = prefs.getBool("autoconnexionENT") ?? false;
     _controllerUsername.text = usernameENT?.toString() ?? '';
     _controllerPwd.text = pwdENT?.toString() ?? '';
+
+    autoconnexionSelf = prefs.getBool("autoconnexionSelf") ?? false;
+    _controllerUsernameSelf.text = usernameSelf?.toString() ?? '';
+    _controllerPwdSelf.text = pwdSelf?.toString() ?? '';
   }
 
   Future<void> sendMessage() async {
@@ -103,6 +113,11 @@ class _SettingsPageState extends State<SettingsPage> {
   void setBool(value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool("autoconnexionENT", value);
+  }
+
+  void setBoolSelf(value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("autoconnexionSelf", value);
   }
 
   @override
@@ -199,6 +214,81 @@ class _SettingsPageState extends State<SettingsPage> {
                             final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                             prefs.setString("pwdENT", value);
+                            Fluttertoast.showToast(
+                                msg: "Mot de passe mis à jour !",
+                                toastLength: Toast.LENGTH_SHORT,
+                                timeInSecForIosWeb: 1);
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Turboself",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "FeixenVariable",
+                            fontSize: getPercentage(context, "w7")),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                              "Activer l'autoconnexion",
+                              style: TextStyle(
+                                  fontFamily: "FeixenVariable",
+                                  fontSize: getPercentage(context, "w5"),
+                                  color: Colors.white)),
+                          Checkbox(
+                            onChanged: (value) {
+                              setState(() {
+                                autoconnexionSelf = value!;
+                              });
+                              setBoolSelf(value);
+                            },
+                            value: autoconnexionSelf,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 90,
+                        child: TextField(
+                          controller: _controllerUsernameSelf,
+                          enabled: autoconnexionSelf,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
+                              labelText: "Adresse email",
+                              labelStyle: TextStyle(color: Colors.white),
+                              fillColor: Colors.white),
+                          onSubmitted: (String value) async {
+                            final SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.setString("usernameSelf", value);
+                            Fluttertoast.showToast(
+                                msg: "Asresse email mis à jour !",
+                                toastLength: Toast.LENGTH_SHORT,
+                                timeInSecForIosWeb: 1);
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 90,
+                        child: TextField(
+                          controller: _controllerPwdSelf,
+                          style: const TextStyle(color: Colors.white),
+                          enabled: autoconnexionSelf,
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                              labelText: "Mot de passe",
+                              labelStyle: TextStyle(color: Colors.white),
+                              fillColor: Colors.white),
+                          onSubmitted: (String value) async {
+                            final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                            prefs.setString("pwdSelf", value);
                             Fluttertoast.showToast(
                                 msg: "Mot de passe mis à jour !",
                                 toastLength: Toast.LENGTH_SHORT,
