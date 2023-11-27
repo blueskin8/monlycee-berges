@@ -11,7 +11,7 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   runApp(MonLycee(prefs: prefs));
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   checkForUpdate();
 }
