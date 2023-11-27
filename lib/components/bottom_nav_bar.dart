@@ -26,17 +26,17 @@ class BottomNavBar extends StatelessWidget {
               );
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.add_card, color: Colors.white),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => const PassPage()
-                  )
-              );
-            },
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.add_card, color: Colors.white),
+          //   onPressed: () {
+          //     Navigator.push(
+          //         context,
+          //         PageRouteBuilder(
+          //             pageBuilder: (_, __, ___) => const PassPage()
+          //         )
+          //     );
+          //   },
+          // ),
           IconButton(
             icon: const Icon(Icons.open_in_browser, color: Colors.white),
             onPressed: () {
