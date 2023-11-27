@@ -144,6 +144,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  mac_address:
+    dependency: "direct main"
+    description:
+      name: mac_address
+      sha256: "630aca295b6c525c1f79d38c8669a65aa06a3e9ff870f73780a8d9694ba789ff"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   matcher:
     dependency: transitive
     description:
