@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,7 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final usernameENT = prefs.get("usernameENT");
     final pwdENT = prefs.get("pwdENT");
 
-    await PackageInfo.fromPlatform().then((value) => version = value.version);
+    PackageInfo.fromPlatform().then((value) => version = value.version);
 
     autoconnexionENT = prefs.getBool("autoconnexionENT") ?? false;
     _controllerUsername.text = usernameENT?.toString() ?? '';
@@ -187,24 +185,18 @@ class _SettingsPageState extends State<SettingsPage> {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 90,
+                        width: MediaQuery.of(context).size.width - 90,
                         child: TextField(
                           style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(
-                              labelText: "Nom",
+                              labelText: "Email",
                               labelStyle: TextStyle(color: Colors.white),
                               fillColor: Colors.white),
                           controller: _controllerAuthor,
                         ),
                       ),
                       SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 90,
+                        width: MediaQuery.of(context).size.width - 90,
                         child: TextField(
                           style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(
@@ -243,7 +235,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       SizedBox(height: getPercentage(context, "h2")),
                       Text(
-                        "MonLycée ▪ Version v$version",
+                        "MonLycée | Version v$version",
                         style: TextStyle(
                           color: Colors.white30,
                           fontFamily: "FeixenVariable",

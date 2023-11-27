@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:monlycee/pages/pass_page.dart';
 import 'package:monlycee/pages/settings_page.dart';
 import 'package:monlycee/pages/turboself_page.dart';
 import 'package:monlycee/pages/home_page.dart';
@@ -22,6 +22,17 @@ class BottomNavBar extends StatelessWidget {
                   context,
                   PageRouteBuilder(
                       pageBuilder: (_, __, ___) => const HomePage()
+                  )
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.add_card, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => PassPage()
                   )
               );
             },
