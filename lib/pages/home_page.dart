@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: getPercentage(context, "h3")
                             ),
                           ), // Text Aristide Bergès
-                          SizedBox(height: getPercentage(context, "h1")),
+                          SizedBox(height: getPercentage(context, "h6")),
                           /*if(updateAvailable) SizedBox(
                             height: 25,
                             child: ElevatedButton(
