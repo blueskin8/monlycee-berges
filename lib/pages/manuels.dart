@@ -34,7 +34,7 @@ class _ManuelsPageState extends State<ManuelsPage> {
                   ],
                 )
               ],
-            )
+            );
           },
         ),
       ),
