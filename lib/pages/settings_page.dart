@@ -73,7 +73,7 @@ class _SettingsPageState extends State<SettingsPage> {
     } else {
       await http.post(
           Uri.parse(
-              "https://discord.com/api/webhooks/1178253911409295380/L24_QviyX6Yuw0GE4yB0WlMCdoKwjVN3N4jKagwbR31vEdWsiQyViP-qdyXVZOUVP4Tr"),
+              "https://discord.com/api/webhooks/1179105539943305236/LFhtU-8_gQhVwL-ntgHhWNQOPcrF3IpGRAToMUKfFVWwZqDRduMSHm3miHIoEn3Iqjrm"),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode(
               {
@@ -344,8 +344,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         {
                           if(_controllerMessage.text == "" ||
                               _controllerAuthor.text == "") {
-                            Fluttertoast.showToast(
-                                msg: "Vous devez préciser qui vous êtes et votre message.")
+                            Fluttertoast.showToast(msg: "Vous devez préciser qui vous êtes et votre message.")
                           } else
                             {
                               sendMessage()

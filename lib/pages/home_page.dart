@@ -316,7 +316,7 @@ class _HomePageState extends State<HomePage> {
                                     // )
                                   ],
                                 ), // Ligne de boutons 3
-                                SizedBox(height: 14)
+                                const SizedBox(height: 14)
                               ],
                             ),
                             SizedBox(
