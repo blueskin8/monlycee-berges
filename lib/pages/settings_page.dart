@@ -26,7 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   late String IPAddress;
 
-  late String version;
+  String version = "";
 
   bool autoconnexionENT = false;
   bool autoconnexionSelf = false;
@@ -56,6 +56,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> sendMessage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
     final String author = _controllerAuthor.text;
     final String message = _controllerMessage.text;
 
@@ -68,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
     var res = await http.get(Uri.parse("https://raw.githubusercontent.com/blueskin8/monlycee-berges/main/blacklist.txt"));
     debugPrint(res.body);
 
-    if(res.body.contains(IPAddress)) {
+    if(res.body.contains(prefs.get('uuid').toString())) {
       Fluttertoast.showToast(msg: "Vous avez été banni du système de rapport");
     } else {
       await http.post(
@@ -89,6 +91,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       {
                         "name": "Adresse IP",
                         "value": IPAddress
+                      },
+                      {
+                        "name": "UUID",
+                        "value": prefs.get("uuid")
                       },
                       {
                         "name": "Version de l'application",

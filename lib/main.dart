@@ -5,15 +5,20 @@ import 'package:github/github.dart';
 import 'package:monlycee/pages/home_page.dart';
 import 'package:ota_update/ota_update.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   runApp(MonLycee(prefs: prefs));
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   checkForUpdate();
+
+  if(prefs.get("uuid")==null) {
+    prefs.setString("uuid", const Uuid().v4());
+  }
 }
 
 void checkForUpdate() async {
