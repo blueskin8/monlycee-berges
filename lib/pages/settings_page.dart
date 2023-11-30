@@ -28,6 +28,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   String version = "";
 
+  String idclient = "";
+
   bool autoconnexionENT = false;
   bool autoconnexionSelf = false;
 
@@ -45,6 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final pwdSelf = prefs.get("pwdSelf");
 
     version = (await PackageInfo.fromPlatform()).version;
+    idclient = prefs.get("uuid").toString();
 
     autoconnexionENT = prefs.getBool("autoconnexionENT") ?? false;
     _controllerUsername.text = usernameENT?.toString() ?? '';
@@ -364,6 +367,14 @@ class _SettingsPageState extends State<SettingsPage> {
                           color: Colors.white30,
                           fontFamily: "FeixenVariable",
                           fontSize: getPercentage(context, "w4")
+                        ),
+                      ),
+                      Text(
+                        "ID du client: $idclient",
+                        style: TextStyle(
+                            color: Colors.white30,
+                            fontFamily: "FeixenVariable",
+                            fontSize: getPercentage(context, "w3")
                         ),
                       ),
                       SizedBox(height: getPercentage(context, "h5"))
