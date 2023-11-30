@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:monlycee/pages/alomath_page.dart';
 import 'package:monlycee/pages/mtag_page.dart';
 import 'package:monlycee/pages/ent_page.dart';
 import 'package:monlycee/pages/turboself_page.dart';
 import 'package:monlycee/pages/settings_page.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
+import 'package:monlycee/pages/math_manuel.dart';
 import 'package:ota_update/ota_update.dart';
 import 'package:package_info/package_info.dart';
 import 'package:github/github.dart';
+import 'package:monlycee/pages/alomath_page.dart';
 import 'package:monlycee/pages/news_page.dart';
-import '../components/home_button.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -104,11 +105,72 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(right: 7, left: 7),
-                                    child: HomeButton(buttonText: "ENT", imageLogoPath: "assets/BetterENT-logo.png", targetPageInstance: ENTPage()),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          backgroundColor: const Color(0xff43497D),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20.0),
+                                              side: const BorderSide(color: Colors.white, width: 1)
+                                          ),
+                                          fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
+                                      onPressed: () => {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(pageBuilder: (_, __, ___) => ENTPage())
+                                        )
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset("assets/BetterENT-logo.png", width: 40),
+                                          Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                            "ENT",
+                                            style: TextStyle(
+                                                fontFamily: "FeixenVariable",
+                                                color: Colors.white,
+                                                fontSize: getPercentage(context, "w5")
+                                            ),
+                                          ),)
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(right: 7, left: 7),
-                                    child:HomeButton(buttonText: "Turboself", imageLogoPath: "assets/turboself.png", targetPageInstance: TurboselfPage()),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          backgroundColor: const Color(0xff43497D),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20.0),
+                                              side: const BorderSide(color: Colors.white, width: 1)
+                                          ),
+                                          fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
+                                      onPressed: () => {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(pageBuilder: (_, __, ___) => TurboselfPage())
+                                        )
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset("assets/turboself.png", width: 40,),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 12),
+                                            child: Text(
+                                              "Turboself",
+                                              style: TextStyle(
+                                                  fontFamily: "FeixenVariable",
+                                                  color: Colors.white,
+                                                  fontSize: getPercentage(context, "w5")
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
@@ -119,11 +181,69 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(right: 7, left: 7),
-                                    child: HomeButton(buttonText: "Horaires", imageLogoPath: "assets/mtag-logo.png", targetPageInstance: MTagPage()),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          backgroundColor: const Color(0xff43497D),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20.0),
+                                              side: const BorderSide(color: Colors.white, width: 1)
+                                          ),
+                                          fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
+                                      onPressed: () => {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(pageBuilder: (_, __, ___) => MTagPage())
+                                        )
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset("assets/mtag-logo.png", width: 40,),
+                                          Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                            "Horaires",
+                                            style: TextStyle(
+                                                fontFamily: "FeixenVariable",
+                                                color: Colors.white,
+                                                fontSize: getPercentage(context, "w5")
+                                            ),
+                                          ),)
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(right: 7, left: 7),
-                                    child: HomeButton(buttonText: "Préférences", imageLogoPath: "assets/cogs.png", targetPageInstance: SettingsPage()),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          backgroundColor: const Color(0xff43497D),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20.0),
+                                              side: const BorderSide(color: Colors.white, width: 1)
+                                          ),
+                                          fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                      ),
+                                      onPressed: () => {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(pageBuilder: (_, __, ___) => const SettingsPage())
+                                        )
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset("assets/cogs.png", width: 40,),
+                                          Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                            "Préférences",
+                                            style: TextStyle(
+                                                fontFamily: "FeixenVariable",
+                                                color: Colors.white,
+                                                fontSize: getPercentage(context, "w4")
+                                            ),
+                                          ),)
+                                        ],
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
@@ -135,7 +255,36 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(right: 7, left: 7),
-                                      child: HomeButton(buttonText: "Alomath", imageLogoPath: "assets/alomath.png", targetPageInstance: AlomathPage()),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.only(left: 20),
+                                            backgroundColor: const Color(0xff43497D),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(20.0),
+                                                side: const BorderSide(color: Colors.white, width: 1)
+                                            ),
+                                            fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
+                                        ),
+                                        onPressed: () => {
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(pageBuilder: (_, __, ___) => MathManuelPage())
+                                          )
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Image.asset("assets/mathbook.png", width: 40,),
+                                            Padding(padding: const EdgeInsets.only(left: 12), child: Text(
+                                              "Manuel",
+                                              style: TextStyle(
+                                                  fontFamily: "FeixenVariable",
+                                                  color: Colors.white,
+                                                  fontSize: getPercentage(context, "w5")
+                                              ),
+                                            ),)
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(right: 7, left: 7),
