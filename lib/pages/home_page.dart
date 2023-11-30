@@ -120,8 +120,8 @@ class _HomePageState extends State<HomePage> {
                                     child: HomeButton(buttonText: "Horaires", imageLogoPath: "assets/mtag-logo.png", targetPageInstance: MTagPage(), percentageRefContext: context),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(right: 7, left: 7),
-                                    child: HomeButton(buttonText: "Préférences", imageLogoPath: "assets/cogs.png", targetPageInstance: SettingsPage(), percentageRefContext: context, styleSheet: const HomeButtonStyleSheet(fontSize: "w4")),
+                                    padding: const EdgeInsets.only(right: 7, left: 7),
+                                    child: HomeButton(buttonText: "Préférences", imageLogoPath: "assets/cogs.png", targetPageInstance: const SettingsPage(), percentageRefContext: context, styleSheet: const HomeButtonStyleSheet(fontSize: "w4")),
                                   )
                                 ],
                               ),

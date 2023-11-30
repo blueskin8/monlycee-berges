@@ -23,6 +23,7 @@ class HomeButton extends StatelessWidget {
   final void Function(BuildContext buildContext, Widget targetPage)? onPress;
 
   const HomeButton({
+    super.key,
     required this.buttonText,
     required this.imageLogoPath,
     required this.targetPageInstance,
