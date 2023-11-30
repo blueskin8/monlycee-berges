@@ -271,7 +271,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             final SharedPreferences prefs = await SharedPreferences.getInstance();
                             prefs.setString("usernameSelf", value);
                             Fluttertoast.showToast(
-                                msg: "Asresse email mis à jour !",
+                                msg: "Adresse email mis à jour !",
                                 toastLength: Toast.LENGTH_SHORT,
                                 timeInSecForIosWeb: 1);
                           },
