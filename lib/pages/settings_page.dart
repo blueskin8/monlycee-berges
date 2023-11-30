@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
 import 'package:package_info/package_info.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 
 class SettingsPage extends StatefulWidget {
@@ -21,6 +22,9 @@ class _SettingsPageState extends State<SettingsPage> {
   final TextEditingController _controllerUsernameSelf = TextEditingController();
   final TextEditingController _controllerPwdSelf = TextEditingController();
 
+  final TextEditingController _controllerUsernameAlomath = TextEditingController();
+  final TextEditingController _controllerPwdAlomath = TextEditingController();
+
   final TextEditingController _controllerMessage = TextEditingController();
   final TextEditingController _controllerAuthor = TextEditingController();
 
@@ -32,6 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   bool autoconnexionENT = false;
   bool autoconnexionSelf = false;
+  bool autoconnexionAlomath = false;
 
   @override
   void initState() {
@@ -45,6 +50,8 @@ class _SettingsPageState extends State<SettingsPage> {
     final pwdENT = prefs.get("pwdENT");
     final usernameSelf = prefs.get("usernameSelf");
     final pwdSelf = prefs.get("pwdSelf");
+    final usernameAlomath = prefs.get("usernameAlomath");
+    final pwdAlomath = prefs.get("pwdAlomath");
 
     version = (await PackageInfo.fromPlatform()).version;
     idclient = prefs.get("uuid").toString();
@@ -56,6 +63,10 @@ class _SettingsPageState extends State<SettingsPage> {
     autoconnexionSelf = prefs.getBool("autoconnexionSelf") ?? false;
     _controllerUsernameSelf.text = usernameSelf?.toString() ?? '';
     _controllerPwdSelf.text = pwdSelf?.toString() ?? '';
+
+    autoconnexionAlomath = prefs.getBool("autoconnexionAlomath") ?? false;
+    _controllerUsernameAlomath.text = usernameAlomath?.toString() ?? '';
+    _controllerPwdAlomath.text = pwdAlomath?.toString() ?? '';
   }
 
   Future<void> sendMessage() async {
@@ -127,6 +138,11 @@ class _SettingsPageState extends State<SettingsPage> {
   void setBoolSelf(value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool("autoconnexionSelf", value);
+  }
+
+  void setBoolAlomath(value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("autoconnexionAlomath", value);
   }
 
   @override
@@ -298,6 +314,104 @@ class _SettingsPageState extends State<SettingsPage> {
                             final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                             prefs.setString("pwdSelf", value);
+                            Fluttertoast.showToast(
+                                msg: "Mot de passe mis à jour !",
+                                toastLength: Toast.LENGTH_SHORT,
+                                timeInSecForIosWeb: 1);
+                          },
+                        ),
+                      ),
+                      Text(
+                        "Alomath",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "FeixenVariable",
+                            fontSize: getPercentage(context, "w7")),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff2A3961),
+                          fixedSize: Size(getPercentage(context, "w75"), 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(9),
+                            side: const BorderSide(
+                              color: Colors.white,
+                              width: 1
+                            )
+                          )
+                        ),
+                        onPressed: () async  {
+                          await launchUrl(Uri.parse("https://alomath.fr/indexLAB.php"));
+                        },
+                        child: const Text(
+                          "Pas de compte Alomath ?",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "FeixenVariable"
+                          ),
+                        ),
+
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                              "Activer l'autoconnexion",
+                              style: TextStyle(
+                                  fontFamily: "FeixenVariable",
+                                  fontSize: getPercentage(context, "w5"),
+                                  color: Colors.white)),
+                          Checkbox(
+                            onChanged: (value) {
+                              setState(() {
+                                autoconnexionAlomath = value!;
+                              });
+                              setBoolAlomath(value);
+                            },
+                            value: autoconnexionAlomath,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 90,
+                        child: TextField(
+                          controller: _controllerUsernameAlomath,
+                          enabled: autoconnexionAlomath,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
+                              labelText: "Nom d'utilisateur",
+                              labelStyle: TextStyle(color: Colors.white),
+                              fillColor: Colors.white),
+                          onSubmitted: (String value) async {
+                            final SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.setString("usernameAlomath", value);
+                            Fluttertoast.showToast(
+                                msg: "Nom d'utilisateur mis à jour !",
+                                toastLength: Toast.LENGTH_SHORT,
+                                timeInSecForIosWeb: 1);
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 90,
+                        child: TextField(
+                          controller: _controllerPwdAlomath,
+                          style: const TextStyle(color: Colors.white),
+                          enabled: autoconnexionAlomath,
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                              labelText: "Mot de passe",
+                              labelStyle: TextStyle(color: Colors.white),
+                              fillColor: Colors.white),
+                          onSubmitted: (String value) async {
+                            final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                            prefs.setString("pwdAlomath", value);
                             Fluttertoast.showToast(
                                 msg: "Mot de passe mis à jour !",
                                 toastLength: Toast.LENGTH_SHORT,

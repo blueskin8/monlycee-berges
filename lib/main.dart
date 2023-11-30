@@ -14,7 +14,7 @@ void main() async {
   runApp(MonLycee(prefs: prefs));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  checkForUpdate();
+  // checkForUpdate();
 
   if(prefs.get("uuid")==null) {
     prefs.setString("uuid", const Uuid().v4());

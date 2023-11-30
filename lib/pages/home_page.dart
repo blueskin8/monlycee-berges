@@ -410,7 +410,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: getPercentage(context, "w3"),)
+                                  SizedBox(height: getPercentage(context, "w3"))
                                 ],
                               ),
                             ),
@@ -431,8 +431,10 @@ class _HomePageState extends State<HomePage> {
     WidgetsFlutterBinding.ensureInitialized();
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    latestVersion = (await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges'))).tagName!;
-    versionDescription = (await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges'))).body!;
+    Release latestRelease = (await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')));
+
+    latestVersion = latestRelease.tagName!;
+    versionDescription = latestRelease.body!;
 
     if(latestVersion == "" && versionDescription == "") {
       setState(() {
@@ -442,7 +444,6 @@ class _HomePageState extends State<HomePage> {
     }
 
     if(!updateAvailable) {
-      latestVersion = (await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges'))).tagName!;
       String appVersion = "v${packageInfo.version}";
       debugPrint("Current app version : $appVersion | Latest app version : $latestVersion");
       if (latestVersion != appVersion) {
