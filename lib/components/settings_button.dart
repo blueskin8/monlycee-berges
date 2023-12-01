@@ -12,8 +12,8 @@ class SettingsButtonStyleSheet {
     this.buttonHeight = "h9",
     this.buttonWidth = "w100",
     this.fontSize = "w7",
-    this.borderTop = 0.5,
-    this.borderBottom = 0.5
+    this.borderTop = 0.6,
+    this.borderBottom = 0.7
   });
 }
 
