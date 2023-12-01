@@ -47,7 +47,6 @@ class _SettingsPageState extends State<SettingsPage> {
           future: getPrefsInstance(),
           builder: (context, snapshot) {
             return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SingleChildScrollView(
                   child: Column(
@@ -55,6 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       SizedBox(height: getPercentage(context, "h13")),
                       Text(
                         "Paramètres",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: "FeixenBold",
@@ -172,6 +172,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       SizedBox(height: getPercentage(context, "h2")),
                       Text(
                         "MonLycée | Version v$version",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white30,
                           fontFamily: "FeixenVariable",
@@ -180,6 +181,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       Text(
                         "ID du client: $idclient",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.white30,
                             fontFamily: "FeixenVariable",
