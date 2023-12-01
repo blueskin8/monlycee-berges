@@ -45,7 +45,7 @@ class HomeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(left: getPercentage(percentageRefContext ?? context, "w4")),
         backgroundColor: const Color(0xff43497D),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
@@ -61,7 +61,7 @@ class HomeButton extends StatelessWidget {
         children: [
           Image.asset(imageLogoPath, width: getPercentage(percentageRefContext ?? context, styleSheet.iconSize)),
           Padding(
-            padding: const EdgeInsets.only(left: 12),
+            padding: EdgeInsets.only(left: getPercentage(percentageRefContext ?? context, "w4")),
             child: Text(
               buttonText,
               style: TextStyle(
