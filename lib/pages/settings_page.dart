@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:monlycee/pages/settings/alomath.dart';
+import 'package:monlycee/pages/settings/ent.dart';
+import 'package:monlycee/pages/settings/support.dart';
+import 'package:monlycee/pages/settings/turboself.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:convert';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -16,27 +18,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  final TextEditingController _controllerUsername = TextEditingController();
-  final TextEditingController _controllerPwd = TextEditingController();
-
-  final TextEditingController _controllerUsernameSelf = TextEditingController();
-  final TextEditingController _controllerPwdSelf = TextEditingController();
-
-  final TextEditingController _controllerUsernameAlomath = TextEditingController();
-  final TextEditingController _controllerPwdAlomath = TextEditingController();
-
-  final TextEditingController _controllerMessage = TextEditingController();
-  final TextEditingController _controllerAuthor = TextEditingController();
-
-  late String IPAddress;
-
   String version = "";
 
   String idclient = "";
-
-  bool autoconnexionENT = false;
-  bool autoconnexionSelf = false;
-  bool autoconnexionAlomath = false;
 
   @override
   void initState() {
@@ -46,103 +30,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> getPrefsInstance() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final usernameENT = prefs.get("usernameENT");
-    final pwdENT = prefs.get("pwdENT");
-    final usernameSelf = prefs.get("usernameSelf");
-    final pwdSelf = prefs.get("pwdSelf");
-    final usernameAlomath = prefs.get("usernameAlomath");
-    final pwdAlomath = prefs.get("pwdAlomath");
 
     version = (await PackageInfo.fromPlatform()).version;
     idclient = prefs.get("uuid").toString();
-
-    autoconnexionENT = prefs.getBool("autoconnexionENT") ?? false;
-    _controllerUsername.text = usernameENT?.toString() ?? '';
-    _controllerPwd.text = pwdENT?.toString() ?? '';
-
-    autoconnexionSelf = prefs.getBool("autoconnexionSelf") ?? false;
-    _controllerUsernameSelf.text = usernameSelf?.toString() ?? '';
-    _controllerPwdSelf.text = pwdSelf?.toString() ?? '';
-
-    autoconnexionAlomath = prefs.getBool("autoconnexionAlomath") ?? false;
-    _controllerUsernameAlomath.text = usernameAlomath?.toString() ?? '';
-    _controllerPwdAlomath.text = pwdAlomath?.toString() ?? '';
-  }
-
-  Future<void> sendMessage() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    final String author = _controllerAuthor.text;
-    final String message = _controllerMessage.text;
-
-    final response = await http.get(Uri.parse('https://httpbin.org/ip'));
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      IPAddress = data['origin'];
-    }
-
-    var res = await http.get(Uri.parse("https://raw.githubusercontent.com/blueskin8/monlycee-berges/main/blacklist.txt"));
-    debugPrint(res.body);
-
-    if(res.body.contains(prefs.get('uuid').toString())) {
-      Fluttertoast.showToast(msg: "Vous avez été banni du système de rapport");
-    } else {
-      await http.post(
-          Uri.parse(
-              "https://discord.com/api/webhooks/1179105539943305236/LFhtU-8_gQhVwL-ntgHhWNQOPcrF3IpGRAToMUKfFVWwZqDRduMSHm3miHIoEn3Iqjrm"),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode(
-              {
-                "embeds": [
-                  {
-                    "title": "Nouveau report",
-                    "color": 12594220,
-                    "fields": [
-                      {
-                        "name": "Adresse e-mail",
-                        "value": author
-                      },
-                      {
-                        "name": "Adresse IP",
-                        "value": IPAddress
-                      },
-                      {
-                        "name": "UUID",
-                        "value": prefs.get("uuid")
-                      },
-                      {
-                        "name": "Version de l'application",
-                        "value": "v$version"
-                      },
-                      {
-                        "name": "Message",
-                        "value": message
-                      }
-                    ]
-                  }
-                ]
-              }
-          )
-      );
-      _controllerMessage.text = "";
-      _controllerAuthor.text = "";
-      Fluttertoast.showToast(msg: "Message envoyé !");
-    }
-  }
-
-  void setBool(value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("autoconnexionENT", value);
-  }
-
-  void setBoolSelf(value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("autoconnexionSelf", value);
-  }
-
-  void setBoolAlomath(value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("autoconnexionAlomath", value);
   }
 
   @override
@@ -171,308 +61,113 @@ class _SettingsPageState extends State<SettingsPage> {
                             fontSize: getPercentage(context, "w15")),
                       ),
                       const SizedBox(height: 20),
-                      Text(
-                        "ENT",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "FeixenVariable",
-                            fontSize: getPercentage(context, "w7")),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                              "Activer l'autoconnexion",
-                              style: TextStyle(
-                                  fontFamily: "FeixenVariable",
-                                  fontSize: getPercentage(context, "w5"),
-                                  color: Colors.white)),
-                          Checkbox(
-                            onChanged: (value) {
-                              setState(() {
-                                autoconnexionENT = value!;
-                              });
-                              setBool(value);
-                            },
-                            value: autoconnexionENT,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 90,
-                        child: TextField(
-                          controller: _controllerUsername,
-                          enabled: autoconnexionENT,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                              labelText: "Nom d'utilisateur",
-                              labelStyle: TextStyle(color: Colors.white),
-                              fillColor: Colors.white),
-                          onSubmitted: (String value) async {
-                            final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                            prefs.setString("usernameENT", value);
-                            Fluttertoast.showToast(
-                                msg: "Nom d'utilisateur mis à jour !",
-                                toastLength: Toast.LENGTH_SHORT,
-                                timeInSecForIosWeb: 1);
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 90,
-                        child: TextField(
-                          controller: _controllerPwd,
-                          style: const TextStyle(color: Colors.white),
-                          enabled: autoconnexionENT,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                              labelText: "Mot de passe",
-                              labelStyle: TextStyle(color: Colors.white),
-                              fillColor: Colors.white),
-                          onSubmitted: (String value) async {
-                            final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                            prefs.setString("pwdENT", value);
-                            Fluttertoast.showToast(
-                                msg: "Mot de passe mis à jour !",
-                                toastLength: Toast.LENGTH_SHORT,
-                                timeInSecForIosWeb: 1);
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        "Turboself",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "FeixenVariable",
-                            fontSize: getPercentage(context, "w7")),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                              "Activer l'autoconnexion",
-                              style: TextStyle(
-                                  fontFamily: "FeixenVariable",
-                                  fontSize: getPercentage(context, "w5"),
-                                  color: Colors.white)),
-                          Checkbox(
-                            onChanged: (value) {
-                              setState(() {
-                                autoconnexionSelf = value!;
-                              });
-                              setBoolSelf(value);
-                            },
-                            value: autoconnexionSelf,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 90,
-                        child: TextField(
-                          controller: _controllerUsernameSelf,
-                          enabled: autoconnexionSelf,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                              labelText: "Adresse email",
-                              labelStyle: TextStyle(color: Colors.white),
-                              fillColor: Colors.white),
-                          onSubmitted: (String value) async {
-                            final SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setString("usernameSelf", value);
-                            Fluttertoast.showToast(
-                                msg: "Adresse email mis à jour !",
-                                toastLength: Toast.LENGTH_SHORT,
-                                timeInSecForIosWeb: 1);
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 90,
-                        child: TextField(
-                          controller: _controllerPwdSelf,
-                          style: const TextStyle(color: Colors.white),
-                          enabled: autoconnexionSelf,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                              labelText: "Mot de passe",
-                              labelStyle: TextStyle(color: Colors.white),
-                              fillColor: Colors.white),
-                          onSubmitted: (String value) async {
-                            final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                            prefs.setString("pwdSelf", value);
-                            Fluttertoast.showToast(
-                                msg: "Mot de passe mis à jour !",
-                                toastLength: Toast.LENGTH_SHORT,
-                                timeInSecForIosWeb: 1);
-                          },
-                        ),
-                      ),
-                      Text(
-                        "Alomath",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "FeixenVariable",
-                            fontSize: getPercentage(context, "w7")),
-                      ),
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff2A3961),
-                          fixedSize: Size(getPercentage(context, "w75"), 15),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(9),
-                            side: const BorderSide(
-                              color: Colors.white,
-                              width: 1
-                            )
-                          )
-                        ),
-                        onPressed: () async  {
-                          await launchUrl(Uri.parse("https://alomath.fr/indexLAB.php"));
+                        onPressed: () => {
+                          Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const EntSettingsPage()))
                         },
-                        child: const Text(
-                          "Pas de compte Alomath ?",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "FeixenVariable"
-                          ),
-                        ),
-
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                              "Activer l'autoconnexion",
-                              style: TextStyle(
-                                  fontFamily: "FeixenVariable",
-                                  fontSize: getPercentage(context, "w5"),
-                                  color: Colors.white)),
-                          Checkbox(
-                            onChanged: (value) {
-                              setState(() {
-                                autoconnexionAlomath = value!;
-                              });
-                              setBoolAlomath(value);
-                            },
-                            value: autoconnexionAlomath,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 90,
-                        child: TextField(
-                          controller: _controllerUsernameAlomath,
-                          enabled: autoconnexionAlomath,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                              labelText: "Nom d'utilisateur",
-                              labelStyle: TextStyle(color: Colors.white),
-                              fillColor: Colors.white),
-                          onSubmitted: (String value) async {
-                            final SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setString("usernameAlomath", value);
-                            Fluttertoast.showToast(
-                                msg: "Nom d'utilisateur mis à jour !",
-                                toastLength: Toast.LENGTH_SHORT,
-                                timeInSecForIosWeb: 1);
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 90,
-                        child: TextField(
-                          controller: _controllerPwdAlomath,
-                          style: const TextStyle(color: Colors.white),
-                          enabled: autoconnexionAlomath,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                              labelText: "Mot de passe",
-                              labelStyle: TextStyle(color: Colors.white),
-                              fillColor: Colors.white),
-                          onSubmitted: (String value) async {
-                            final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                            prefs.setString("pwdAlomath", value);
-                            Fluttertoast.showToast(
-                                msg: "Mot de passe mis à jour !",
-                                toastLength: Toast.LENGTH_SHORT,
-                                timeInSecForIosWeb: 1);
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      Text(
-                        "Un bug ? Une idée ?\nEnvoyez-nous un message",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "FeixenVariable",
-                          fontSize: getPercentage(context, "w7"),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width - 90,
-                        child: TextField(
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                              labelText: "Email",
-                              labelStyle: TextStyle(color: Colors.white),
-                              fillColor: Colors.white),
-                          controller: _controllerAuthor,
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width - 90,
-                        child: TextField(
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                            labelText: "Message",
-                            labelStyle: TextStyle(color: Colors.white),
-                            fillColor: Colors.white,
-                          ),
-                          controller: _controllerMessage,
-                        ),
-                      ),
-                      SizedBox(height: getPercentage(context, "h1")),
-                      ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff43497D)),
+                            fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
+                            backgroundColor: const Color(0xff2A3961),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                side: const BorderSide(
+                                    color: Colors.white,
+                                    width: 1
+                                )
+                            )
+                        ),
                         child: Text(
-                          "Envoyer",
+                          "ENT",
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: "FeixenVariable",
-                              fontSize: getPercentage(context, "w5")),
+                              fontSize: getPercentage(context, "w7")
+                          ),
                         ),
-                        onPressed: () =>
-                        {
-                          if(_controllerMessage.text == "" ||
-                              _controllerAuthor.text == "") {
-                            Fluttertoast.showToast(msg: "Vous devez préciser qui vous êtes et votre message.")
-                          } else
-                            {
-                              sendMessage()
-                            }
-                        },
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: const Border(bottom: BorderSide(color: Colors.white, width: 1), left: BorderSide(color: Colors.white, width: 1), right: BorderSide(color: Colors.white, width: 1))
+                        ),
+                        width: getPercentage(context, "w100"),
+                        height: getPercentage(context, "h9"),
+                        child: ElevatedButton(
+                          onPressed: () => {
+                            Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const TurboselfSettingsPage()))
+                          },
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
+                              backgroundColor: const Color(0xff2A3961),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)
+                              )
+                          ),
+                          child: Text(
+                            "Turboself",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "FeixenVariable",
+                                fontSize: getPercentage(context, "w7")
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: const Border(bottom: BorderSide(color: Colors.white, width: 1), left: BorderSide(color: Colors.white, width: 1), right: BorderSide(color: Colors.white, width: 1))
+                        ),
+                        width: getPercentage(context, "w100"),
+                        height: getPercentage(context, "h9"),
+                        child: ElevatedButton(
+                          onPressed: () => {
+                            Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const AlomathSettingsPage()))
+                          },
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
+                              backgroundColor: const Color(0xff2A3961),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)
+                              )
+                          ),
+                          child: Text(
+                            "Alomath",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "FeixenVariable",
+                                fontSize: getPercentage(context, "w7")
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: const Border(bottom: BorderSide(color: Colors.white, width: 1), left: BorderSide(color: Colors.white, width: 1), right: BorderSide(color: Colors.white, width: 1))
+                        ),
+                        width: getPercentage(context, "w100"),
+                        height: getPercentage(context, "h9"),
+                        child: ElevatedButton(
+                          onPressed: () => {
+                            Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const SupportPage()))
+                          },
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
+                              backgroundColor: const Color(0xff2A3961),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)
+                              )
+                          ),
+                          child: Text(
+                            "Support",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "FeixenVariable",
+                                fontSize: getPercentage(context, "w7")
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(height: getPercentage(context, "h2")),
                       Text(

@@ -1,0 +1,200 @@
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../components/bottom_nav_bar.dart';
+import '../../other/get_percentage.dart';
+import '../settings_page.dart';
+
+class AlomathSettingsPage extends StatefulWidget {
+  const AlomathSettingsPage({super.key});
+
+  @override
+  State<AlomathSettingsPage> createState() => _AlomathSettingsPage();
+}
+
+class _AlomathSettingsPage extends State<AlomathSettingsPage> {
+
+  final TextEditingController _controllerUsernameAlomath = TextEditingController();
+  final TextEditingController _controllerPwdAlomath = TextEditingController();
+
+  bool autoconnexionAlomath = false;
+
+  Future<void> initPage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final usernameAlomath = prefs.get("usernameAlomath");
+    final pwdAlomath = prefs.get("pwdAlomath");
+
+    autoconnexionAlomath = prefs.getBool("autoconnexionAlomath") ?? false;
+    _controllerUsernameAlomath.text = usernameAlomath?.toString() ?? '';
+    _controllerPwdAlomath.text = pwdAlomath?.toString() ?? '';
+  }
+
+  void setBoolAlomath(value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("autoconnexionAlomath", value);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Mon lycée",
+      darkTheme: ThemeData.dark(),
+      home: Scaffold(
+        backgroundColor: const Color(0xff2a3961),
+        bottomNavigationBar: const BottomNavBar(),
+        body: FutureBuilder(
+            future: initPage(),
+            builder: (context, snapshot) => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: getPercentage(context, "h5")),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                            backgroundColor: const Color(0xff2A3961),
+                            fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9"))
+                        ),
+                        onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const SettingsPage())),
+                        child: Text(
+                          "Retour",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "FeixenVariable",
+                              fontSize: getPercentage(context, "w5")
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "Paramètres Alomath",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "FeixenBold",
+                          fontSize: getPercentage(context, "w7")),
+                    ),
+                    SizedBox(height: getPercentage(context, "h2")),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff2A3961),
+                          fixedSize: Size(getPercentage(context, "w75"), 15),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(9),
+                              side: const BorderSide(
+                                  color: Colors.white,
+                                  width: 1
+                              )
+                          )
+                      ),
+                      onPressed: () async  {
+                        await launchUrl(Uri.parse("https://alomath.fr/indexLAB.php"));
+                      },
+                      child: const Text(
+                        "Pas de compte Alomath ?",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "FeixenVariable"
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: getPercentage(context, "h1")),
+                    ElevatedButton(
+                      onPressed: () {
+                        if(autoconnexionAlomath) {
+                          setState(() {
+                            autoconnexionAlomath = false;
+                          });
+                          setBoolAlomath(false);
+                        } else {
+                          setState(() {
+                            autoconnexionAlomath = true;
+                          });
+                          setBoolAlomath(true);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size(getPercentage(context, "w80"), getPercentage(context, "h5")),
+                          backgroundColor: const Color(0xff2A3961),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(9),
+                              side: const BorderSide(
+                                  width: 1,
+                                  color: Colors.white
+                              )
+                          )
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                              "Activer l'autoconnexion",
+                              style: TextStyle(
+                                  fontFamily: "FeixenVariable",
+                                  fontSize: getPercentage(context, "w5"),
+                                  color: Colors.white)),
+                          Checkbox(
+                            value: autoconnexionAlomath, onChanged: (bool? value) {},
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width - 90,
+                      child: TextField(
+                        controller: _controllerUsernameAlomath,
+                        enabled: autoconnexionAlomath,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
+                            labelText: "Nom d'utilisateur",
+                            labelStyle: TextStyle(color: Colors.white),
+                            fillColor: Colors.white),
+                        onSubmitted: (String value) async {
+                          final SharedPreferences prefs = await SharedPreferences.getInstance();
+                          prefs.setString("usernameAlomath", value);
+                          Fluttertoast.showToast(
+                              msg: "Nom d'utilisateur mis à jour !",
+                              toastLength: Toast.LENGTH_SHORT,
+                              timeInSecForIosWeb: 1);
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width - 90,
+                      child: TextField(
+                        controller: _controllerPwdAlomath,
+                        style: const TextStyle(color: Colors.white),
+                        enabled: autoconnexionAlomath,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                            labelText: "Mot de passe",
+                            labelStyle: TextStyle(color: Colors.white),
+                            fillColor: Colors.white),
+                        onSubmitted: (String value) async {
+                          final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                          prefs.setString("pwdAlomath", value);
+                          Fluttertoast.showToast(
+                              msg: "Mot de passe mis à jour !",
+                              toastLength: Toast.LENGTH_SHORT,
+                              timeInSecForIosWeb: 1);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+        ),
+      ),
+    );
+  }
+}
