@@ -8,14 +8,14 @@ import '../../components/bottom_nav_bar.dart';
 import '../../other/get_percentage.dart';
 import 'package:http/http.dart' as http;
 
-class SupportPage extends StatefulWidget {
-  const SupportPage({super.key});
+class SupportSettingsPage extends StatefulWidget {
+  const SupportSettingsPage({super.key});
 
   @override
-  State<SupportPage> createState() => _SupportPageState();
+  State<SupportSettingsPage> createState() => _SupportSettingsPageState();
 }
 
-class _SupportPageState extends State<SupportPage> {
+class _SupportSettingsPageState extends State<SupportSettingsPage> {
 
   final TextEditingController _controllerMessage = TextEditingController();
   final TextEditingController _controllerAuthor = TextEditingController();
