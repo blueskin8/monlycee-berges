@@ -54,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       SizedBox(height: getPercentage(context, "h7")),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(0),
                             border: const Border(bottom: BorderSide(color: Colors.white, width: 1), top: BorderSide(color: Colors.white, width: 1))
                         ),
                         width: getPercentage(context, "w100"),
@@ -82,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(0),
                           border: const Border(bottom: BorderSide(color: Colors.white, width: 1))
                         ),
                         width: getPercentage(context, "w100"),
@@ -95,7 +95,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
                               backgroundColor: const Color(0xff2A3961),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)
+                                borderRadius: BorderRadius.circular(0)
                               )
                           ),
                           child: Text(
@@ -110,7 +110,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(0),
                             border: const Border(bottom: BorderSide(color: Colors.white, width: 1))
                         ),
                         width: getPercentage(context, "w100"),
@@ -123,7 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
                               backgroundColor: const Color(0xff2A3961),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)
+                                borderRadius: BorderRadius.circular(0)
                               )
                           ),
                           child: Text(
@@ -138,7 +138,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(0),
                             border: const Border(bottom: BorderSide(color: Colors.white, width: 1))
                         ),
                         width: getPercentage(context, "w100"),
@@ -151,7 +151,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
                               backgroundColor: const Color(0xff2A3961),
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)
+                                  borderRadius: BorderRadius.circular(0)
                               )
                           ),
                           child: Text(
@@ -166,7 +166,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(0),
                             border: const Border(bottom: BorderSide(color: Colors.white, width: 1))
                         ),
                         width: getPercentage(context, "w100"),
@@ -179,7 +179,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
                               backgroundColor: const Color(0xff2A3961),
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)
+                                  borderRadius: BorderRadius.circular(0)
                               )
                           ),
                           child: Text(
