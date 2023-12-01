@@ -12,6 +12,8 @@ import 'package:github/github.dart';
 import 'package:monlycee/pages/alomath_page.dart';
 import 'package:monlycee/pages/news_page.dart';
 
+import '../components/home_button.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -136,41 +138,12 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(right: 7, left: 7),
-                                      child: HomeButton(buttonText: "Alomath", imageLogoPath: "assets/alomath.png", targetPageInstance: AlomathPage(), percentageRefContext: context),
+                                      child: HomeButton(buttonText: "Manuel", imageLogoPath: "assets/mathbook.png", targetPageInstance: MathManuelPage(), percentageRefContext: context),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(right: 7, left: 7),
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            padding: const EdgeInsets.only(left: 20),
-                                            backgroundColor: const Color(0xff43497D),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(20.0),
-                                                side: const BorderSide(color: Colors.white, width: 1)
-                                            ),
-                                            fixedSize: Size(getPercentage(context, "w43"), getPercentage(context, "h15"))
-                                        ),
-                                        onPressed: () => {
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(pageBuilder: (_, __, ___) => AlomathPage())
-                                          )
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Image.asset("assets/alomath.png", width: 40,),
-                                            Padding(padding: const EdgeInsets.only(left: 12), child: Text(
-                                              "Alomath",
-                                              style: TextStyle(
-                                                  fontFamily: "FeixenVariable",
-                                                  color: Colors.white,
-                                                  fontSize: getPercentage(context, "w5")
-                                              ),
-                                            ),)
-                                          ],
-                                        ),
-                                      ),
-                                    )
+                                      child: HomeButton(buttonText: "Alomath", imageLogoPath: "assets/alomath.png", targetPageInstance: AlomathPage(), percentageRefContext: context),
+                                    ),
                                   ],
                                 ), // Ligne de boutons 3
                                 const SizedBox(height: 14)

@@ -5,11 +5,13 @@ class HomeButtonStyleSheet {
   final String buttonWidth;
   final String buttonHeight;
   final String fontSize;
+  final String iconSize;
 
   const HomeButtonStyleSheet({
     this.buttonHeight = "h15",
     this.buttonWidth = "w43",
     this.fontSize = "w5",
+    this.iconSize = "w9"
   });
 }
 
@@ -57,7 +59,7 @@ class HomeButton extends StatelessWidget {
       onPressed: () => onPress != null ? onPress!(context, targetPageInstance) : _defaultOnPress(context, targetPageInstance),
       child: Row(
         children: [
-          Image.asset(imageLogoPath, width: 40),
+          Image.asset(imageLogoPath, width: getPercentage(percentageRefContext ?? context, styleSheet.iconSize)),
           Padding(
             padding: const EdgeInsets.only(left: 12),
             child: Text(
