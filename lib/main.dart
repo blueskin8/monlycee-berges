@@ -20,22 +20,6 @@ void main() async {
   }
 }
 
-void checkForUpdate() async {
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
-  final latestRelease = await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges'));
-  final latestVersion = latestRelease.tagName;
-  String appVersion = "v${packageInfo.version}";
-  if (latestVersion != appVersion) {
-    try {
-      GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')).then((release) => {
-        OtaUpdate().execute(release.assets?[0].browserDownloadUrl as String)
-      });
-    } catch (err) {
-      debugPrint("une erreur est survenue lors de la maj auto");
-    }
-  }
-}
-
 class MonLycee extends StatelessWidget {
   final SharedPreferences prefs;
 
