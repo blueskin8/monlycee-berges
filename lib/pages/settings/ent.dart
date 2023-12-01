@@ -96,10 +96,6 @@ class _EntSettingsPage extends State<EntSettingsPage> {
                           backgroundColor: const Color(0xff2A3961),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
-                              side: const BorderSide(
-                                  width: 1,
-                                  color: Colors.white
-                              )
                           )
                       ),
                       child: Row(

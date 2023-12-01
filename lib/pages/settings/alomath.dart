@@ -79,30 +79,6 @@ class _AlomathSettingsPage extends State<AlomathSettingsPage> {
                     ),
                     SizedBox(height: getPercentage(context, "h2")),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff2A3961),
-                          fixedSize: Size(getPercentage(context, "w75"), 15),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(9),
-                              side: const BorderSide(
-                                  color: Colors.white,
-                                  width: 1
-                              )
-                          )
-                      ),
-                      onPressed: () async  {
-                        await launchUrl(Uri.parse("https://alomath.fr/indexLAB.php"));
-                      },
-                      child: const Text(
-                        "Pas de compte Alomath ?",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "FeixenVariable"
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: getPercentage(context, "h1")),
-                    ElevatedButton(
                       onPressed: () {
                         if(autoconnexionAlomath) {
                           setState(() {
@@ -121,10 +97,6 @@ class _AlomathSettingsPage extends State<AlomathSettingsPage> {
                           backgroundColor: const Color(0xff2A3961),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
-                              side: const BorderSide(
-                                  width: 1,
-                                  color: Colors.white
-                              )
                           )
                       ),
                       child: Row(
@@ -189,6 +161,43 @@ class _AlomathSettingsPage extends State<AlomathSettingsPage> {
                         },
                       ),
                     ),
+                    SizedBox(height: getPercentage(context, "h2")),
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //       backgroundColor: const Color(0xff2A3961),
+                    //       fixedSize: Size(getPercentage(context, "w75"), 15),
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(9)
+                    //       )
+                    //   ),
+                    //   onPressed: () async  {
+                    //     await launchUrl(Uri.parse("https://alomath.fr/indexLAB.php"));
+                    //   },
+                    //   child: const Text(
+                    //     "Pas de compte Alomath ?",
+                    //     style: TextStyle(
+                    //         color: Colors.white,
+                    //         fontFamily: "FeixenVariable"
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(
+                      width: getPercentage(context, "w75"),
+                      height: 15,
+                      child: InkWell(
+                        child: const Text(
+                          "Pas de compte Alomath ?",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "FeixenVariable"
+                          ),
+                        ),
+                        onTap: () async {
+                          await launchUrl(Uri.parse("https://alomath.fr/indexLAB.php"));
+                        },
+                      ),
+                    )
                   ],
                 ),
               ],

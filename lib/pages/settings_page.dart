@@ -61,34 +61,38 @@ class _SettingsPageState extends State<SettingsPage> {
                             fontSize: getPercentage(context, "w15")),
                       ),
                       const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () => {
-                          Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const EntSettingsPage()))
-                        },
-                        style: ElevatedButton.styleFrom(
-                            fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
-                            backgroundColor: const Color(0xff2A3961),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                side: const BorderSide(
-                                    color: Colors.white,
-                                    width: 1
-                                )
-                            )
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: const Border(bottom: BorderSide(color: Colors.white, width: 1), top: BorderSide(color: Colors.white, width: 1))
                         ),
-                        child: Text(
-                          "ENT",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "FeixenVariable",
-                              fontSize: getPercentage(context, "w7")
+                        width: getPercentage(context, "w100"),
+                        height: getPercentage(context, "h9"),
+                        child: ElevatedButton(
+                          onPressed: () => {
+                            Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const EntSettingsPage()))
+                          },
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9")),
+                              backgroundColor: const Color(0xff2A3961),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0)
+                              )
+                          ),
+                          child: Text(
+                            "ENT",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "FeixenVariable",
+                                fontSize: getPercentage(context, "w7")
+                            ),
                           ),
                         ),
                       ),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          border: const Border(bottom: BorderSide(color: Colors.white, width: 1), left: BorderSide(color: Colors.white, width: 1), right: BorderSide(color: Colors.white, width: 1))
+                          border: const Border(bottom: BorderSide(color: Colors.white, width: 1))
                         ),
                         width: getPercentage(context, "w100"),
                         height: getPercentage(context, "h9"),
@@ -116,7 +120,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            border: const Border(bottom: BorderSide(color: Colors.white, width: 1), left: BorderSide(color: Colors.white, width: 1), right: BorderSide(color: Colors.white, width: 1))
+                            border: const Border(bottom: BorderSide(color: Colors.white, width: 1))
                         ),
                         width: getPercentage(context, "w100"),
                         height: getPercentage(context, "h9"),
@@ -144,7 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            border: const Border(bottom: BorderSide(color: Colors.white, width: 1), left: BorderSide(color: Colors.white, width: 1), right: BorderSide(color: Colors.white, width: 1))
+                            border: const Border(bottom: BorderSide(color: Colors.white, width: 1))
                         ),
                         width: getPercentage(context, "w100"),
                         height: getPercentage(context, "h9"),
