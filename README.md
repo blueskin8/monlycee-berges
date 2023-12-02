@@ -9,6 +9,7 @@ Bienvenue sur l'application dédiée au lycée Aristide Bergès. Simplifiez votr
 Notre objectif est de simplifier votre expérience en regroupant tous les liens essentiels de manière pratique et intuitive. Si vous repérez des bugs ou avez des suggestions d'amélioration, n'hésitez pas à nous en informer depuis la page des préférences. Nous sommes attentifs à tous vos retours.
 
 
+
 ## Configuration
 
 Dans l'onglet des Préférences, vous avez la possibilité d'activer ou de désactiver l'autoconnexion à l'ENT, où vous pourrez également configurer vos identifiants.
