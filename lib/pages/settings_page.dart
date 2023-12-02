@@ -8,6 +8,7 @@ import 'package:monlycee/pages/settings/turboself.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -70,6 +71,28 @@ class _SettingsPageState extends State<SettingsPage> {
                         buttonText: "À propos",
                         targetPageInstance: AboutSettingsPage(),
                         styleSheet: SettingsButtonStyleSheet(borderBottom: 1),
+                      ),
+                      SizedBox(height: getPercentage(context, "h3")),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.discord),
+                            iconSize: getPercentage(context, "w10"),
+                            color: Colors.white,
+                            onPressed: () async {
+                              await launchUrl(Uri.parse("https://discord.gg/MvYmceb6Ba"));
+                            },
+                          ),
+                          const SizedBox(width: 14),
+                          IconButton(
+                            icon: const ImageIcon(AssetImage("assets/github.png")),
+                            iconSize: getPercentage(context, "w10"),
+                            color: Colors.white,
+                            onPressed: () async {
+                              await launchUrl(Uri.parse("https://github.com/blueskin8/monlycee-berges"));
+                            },
+                          ),
+                        ],
                       ),
                       SizedBox(height: getPercentage(context, "h5"))
                     ],
