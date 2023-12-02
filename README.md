@@ -17,3 +17,5 @@ Dans l'onglet des Préférences, vous avez la possibilité d'activer ou de désa
 # Remerciements
 
 Je remercie Demonloup (https://github.com/DemonloupYT) d'avoir développé l'application avec moi. Je remercie également Graven (https://www.youtube.com/@Gravenilvectuto) de m'avoir aidé à fixer certains bugs grâce à ses connaissances Flutter et Dart.
+
+## Notre discord: https://discord.gg/JVr7HXeffs
