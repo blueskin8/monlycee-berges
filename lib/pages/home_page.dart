@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:monlycee/pages/manuels_page.dart';
 import 'package:monlycee/pages/mtag_page.dart';
 import 'package:monlycee/pages/ent_page.dart';
 import 'package:monlycee/pages/turboself_page.dart';
 import 'package:monlycee/pages/settings_page.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
-import 'package:monlycee/pages/math_manuel.dart';
 import 'package:ota_update/ota_update.dart';
 import 'package:package_info/package_info.dart';
 import 'package:github/github.dart';
 import 'package:monlycee/pages/alomath_page.dart';
 import 'package:monlycee/pages/news_page.dart';
-
-import '../components/home_button.dart';
+import 'package:monlycee/components/home_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -72,64 +72,60 @@ class _HomePageState extends State<HomePage> {
                             ), // Text Aristide Bergès
                             SizedBox(height: getPercentage(context, "h6")),
                             if(updateAvailable) SizedBox(
-                            height: 25,
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                try {
-                                  GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')).then((release) => {
-                                    OtaUpdate().execute(release.assets?[0].browserDownloadUrl as String)
-                                  });
-                                } catch (err) {
-                                  debugPrint("une erreur est survenue lors de la maj auto");
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff678FFF),
-                                  fixedSize: Size(getPercentage(context, "w86") + 14, 10),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)
-                                  )
-                              ),
-                              child: Text(
-                                "Une nouvelle version est disponible",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "FeixenVariable",
-                                    fontSize: getPercentage(context, "w3")
+                              height: 25,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  try {
+                                    GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')).then((release) => {
+                                      OtaUpdate().execute(release.assets?[0].browserDownloadUrl as String)
+                                    });
+                                  } catch (err) {
+                                    debugPrint("une erreur est survenue lors de la maj auto");
+                                    Fluttertoast.showToast(msg: "Une erreur est survenue lors de la mise à jour");
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xff678FFF),
+                                    fixedSize: Size(getPercentage(context, "w86") + 14, 10),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8)
+                                    )
+                                ),
+                                child: Text(
+                                  "Une nouvelle version est disponible",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "FeixenVariable",
+                                      fontSize: getPercentage(context, "w3")
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
                             SizedBox(height: getPercentage(context, "h2")),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 14),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 7, left: 7),
-                                    child: HomeButton(buttonText: "ENT", imageLogoPath: "assets/BetterENT-logo.png", targetPageInstance: ENTPage(), percentageRefContext: context),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 7, left: 7),
-                                    child: HomeButton(buttonText: "Turboself", imageLogoPath: "assets/turboself.png", targetPageInstance: TurboselfPage(), percentageRefContext: context),
-                                  )
-                                ],
-                              ),
-                            ), // Ligne de boutons 1
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 0),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 7, left: 7),
-                                    child: HomeButton(buttonText: "Horaires", imageLogoPath: "assets/mtag-logo.png", targetPageInstance: MTagPage(), percentageRefContext: context),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 7, left: 7),
-                                    child: HomeButton(buttonText: "Préférences", imageLogoPath: "assets/cogs.png", targetPageInstance: const SettingsPage(), percentageRefContext: context, styleSheet: const HomeButtonStyleSheet(fontSize: "w4")),
-                                  )
-                                ],
-                              ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 7, left: 7),
+                                  child: HomeButton(buttonText: "ENT", imageLogoPath: "assets/BetterENT-logo.png", targetPageInstance: ENTPage(), percentageRefContext: context),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 7, left: 7),
+                                  child: HomeButton(buttonText: "Turboself", imageLogoPath: "assets/turboself.png", targetPageInstance: TurboselfPage(), percentageRefContext: context),
+                                )
+                              ],
+                            ),// Ligne de boutons 1
+                            const SizedBox(height: 14),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 7, left: 7),
+                                  child: HomeButton(buttonText: "Horaires", imageLogoPath: "assets/mtag-logo.png", targetPageInstance: MTagPage(), percentageRefContext: context),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 7, left: 7),
+                                  child: HomeButton(buttonText: "Préférences", imageLogoPath: "assets/cogs.png", targetPageInstance: const SettingsPage(), percentageRefContext: context, styleSheet: const HomeButtonStyleSheet(fontSize: "w4")),
+                                )
+                              ],
                             ), // Ligne de boutons 2
                             const SizedBox(height: 14),
                             if(showMore) Column(
@@ -138,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(right: 7, left: 7),
-                                      child: HomeButton(buttonText: "Manuel", imageLogoPath: "assets/mathbook.png", targetPageInstance: MathManuelPage(), percentageRefContext: context),
+                                      child: HomeButton(buttonText: "Manuels", imageLogoPath: "assets/mathbook.png", targetPageInstance: ManuelsPage(), percentageRefContext: context),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(right: 7, left: 7),

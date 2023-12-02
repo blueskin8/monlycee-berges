@@ -8,19 +8,20 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  runApp(MonLycee(prefs: prefs));
+  runApp(const MonLycee());
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   if(prefs.get("uuid")==null) {
     prefs.setString("uuid", const Uuid().v4());
   }
+  if(prefs.get("classe")==null) {
+    prefs.setString("classe", "seconde"); // Classe par défaut lors de l'installation de l'application
+  }
 }
 
 class MonLycee extends StatelessWidget {
-  final SharedPreferences prefs;
-
-  const MonLycee({Key? key, required this.prefs}) : super(key: key);
+  const MonLycee({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
