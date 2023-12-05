@@ -108,7 +108,19 @@ class _AlomathSettingsPage extends State<AlomathSettingsPage> {
                                   fontSize: getPercentage(context, "w5"),
                                   color: Colors.white)),
                           Checkbox(
-                            value: autoconnexionAlomath, onChanged: (bool? value) {},
+                            value: autoconnexionAlomath, onChanged: (bool? value) {
+                              if(autoconnexionAlomath) {
+                                setState(() {
+                                  autoconnexionAlomath = false;
+                                });
+                                setBoolAlomath(false);
+                              } else {
+                                setState(() {
+                                  autoconnexionAlomath = true;
+                                });
+                                setBoolAlomath(true);
+                              }
+                            },
                           ),
                         ],
                       ),

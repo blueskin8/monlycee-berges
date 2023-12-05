@@ -107,7 +107,19 @@ class _EntSettingsPage extends State<EntSettingsPage> {
                                   fontSize: getPercentage(context, "w5"),
                                   color: Colors.white)),
                           Checkbox(
-                            value: autoconnexionENT, onChanged: (bool? value) {},
+                            value: autoconnexionENT, onChanged: (bool? value) {
+                              if(autoconnexionENT) {
+                                setState(() {
+                                  autoconnexionENT = false;
+                                });
+                                setBool(false);
+                              } else {
+                                setState(() {
+                                  autoconnexionENT = true;
+                                });
+                                setBool(true);
+                              }
+                            },
                           ),
                         ],
                       ),

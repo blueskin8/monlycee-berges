@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 7, left: 7),
-                                  child: HomeButton(buttonText: "ENT", imageLogoPath: "assets/BetterENT-logo.png", targetPageInstance: ENTPage(), percentageRefContext: context),
+                                  child: HomeButton(buttonText: "ENT", imageLogoPath: "assets/ent.png", targetPageInstance: ENTPage(), percentageRefContext: context),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 7, left: 7),
@@ -187,11 +187,11 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(vertical: 10),
                                     child: Text(
-                                      latestVersion!="" ? "Version $latestVersion" : "Chargement...",
+                                      latestVersion!="" ? "Nouveautés - Version $latestVersion" : "Nouveautés",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontFamily: "FeixenVariable",
-                                          fontSize: getPercentage(context, "w6")
+                                          fontFamily: "FeixenBold",
+                                          fontSize: getPercentage(context, "w5")
                                       ),
                                     ),
                                   ),
@@ -200,11 +200,11 @@ class _HomePageState extends State<HomePage> {
                                     child: Text(
                                       versionDescription!="" ? versionDescription : "Chargement...",
                                       style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "FeixenVariable",
-                                      fontSize: getPercentage(context, "w4")
+                                        color: Colors.white,
+                                        fontFamily: "FeixenVariable",
+                                        fontSize: getPercentage(context, "w4")
+                                      ),
                                     ),
-                                  ),
                                   ),
                                   const SizedBox(height: 14),
                                   ElevatedButton(

@@ -107,7 +107,19 @@ class _TurboselfSettingsPage extends State<TurboselfSettingsPage> {
                                   fontSize: getPercentage(context, "w5"),
                                   color: Colors.white)),
                           Checkbox(
-                            value: autoconnexionSelf, onChanged: (bool? value) {},
+                            value: autoconnexionSelf, onChanged: (bool? value) {
+                              if(autoconnexionSelf) {
+                                setState(() {
+                                  autoconnexionSelf = false;
+                                });
+                                setBoolSelf(false);
+                              } else {
+                                setState(() {
+                                  autoconnexionSelf = true;
+                                });
+                                setBoolSelf(true);
+                              }
+                            },
                           ),
                         ],
                       ),

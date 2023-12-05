@@ -4,8 +4,7 @@ import 'package:monlycee/components/manuel_button.dart';
 import 'package:monlycee/other/get_percentage.dart';
 import 'package:monlycee/pages/settings/support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:monlycee/other/manuels.dart' as manuels_lib;
 
 class ManuelsPage extends StatefulWidget {
   const ManuelsPage({super.key});
@@ -23,9 +22,7 @@ class _ManuelsPageState extends State<ManuelsPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     classe = prefs.get("classe")!.toString();
-
-    var res = await http.get(Uri.parse("https://raw.githubusercontent.com/blueskin8/monlycee-berges/main/manuels.json"));
-    manuels = jsonDecode(res.body);
+    manuels = manuels_lib.manuels;
   }
 
   @override
@@ -45,7 +42,6 @@ class _ManuelsPageState extends State<ManuelsPage> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-
                       Padding(
                         padding: EdgeInsets.only(top: getPercentage(context, "h13"), bottom: getPercentage(context, "h6")),
                         child: Text(
@@ -103,14 +99,24 @@ class _ManuelsPageState extends State<ManuelsPage> {
                       if(classe == "premiere") Column(
                         children: [
                           Text(
-                              "Aucun manuel publié"
+                            "Aucun manuel publié",
+                            style: TextStyle(
+                              fontFamily: "FeixenVariable",
+                              color: Colors.white,
+                              fontSize: getPercentage(context, "w5")
+                            ),
                           )
                         ],
                       ),
                       if(classe == "terminale") Column(
                         children: [
                           Text(
-                              "Aucun manuel publié"
+                            "Aucun manuel publié",
+                            style: TextStyle(
+                                fontFamily: "FeixenVariable",
+                                color: Colors.white,
+                                fontSize: getPercentage(context, "w5")
+                            ),
                           )
                         ],
                       ),
@@ -135,8 +141,8 @@ class _ManuelsPageState extends State<ManuelsPage> {
                             ),
                           ),
                         ),
-                      )
-
+                      ),
+                      SizedBox(height: getPercentage(context, "h5"))
                     ],
                   ),
                 )

@@ -3,6 +3,7 @@ import 'package:monlycee/components/settings_button.dart';
 import 'package:monlycee/pages/settings/about.dart';
 import 'package:monlycee/pages/settings/alomath.dart';
 import 'package:monlycee/pages/settings/ent.dart';
+import 'package:monlycee/pages/settings/general.dart';
 import 'package:monlycee/pages/settings/support.dart';
 import 'package:monlycee/pages/settings/turboself.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,9 +56,12 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       SizedBox(height: getPercentage(context, "h7")),
                       const SettingsButton(
-                          buttonText: "ENT",
-                          targetPageInstance: EntSettingsPage(),
+                          buttonText: "Général",
+                          targetPageInstance: GeneralSettingsPage(),
                           styleSheet: SettingsButtonStyleSheet(borderTop: 1)),
+                      const SettingsButton(
+                          buttonText: "ENT",
+                          targetPageInstance: EntSettingsPage()),
                       const SettingsButton(
                           buttonText: "Turboself",
                           targetPageInstance: TurboselfSettingsPage()),
