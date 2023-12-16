@@ -21,7 +21,7 @@ class _PassPageState extends State<PassPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: const Color(0xff2A3961),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,

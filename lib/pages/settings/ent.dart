@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:monlycee/other/crypter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../components/bottom_nav_bar.dart';
 import '../../other/get_percentage.dart';
@@ -27,7 +28,7 @@ class _EntSettingsPage extends State<EntSettingsPage> {
 
     autoconnexionENT = prefs.getBool("autoconnexionENT") ?? false;
     _controllerUsername.text = usernameENT?.toString() ?? '';
-    _controllerPwd.text = pwdENT?.toString() ?? '';
+    _controllerPwd.text = Encrypter.decrypt(pwdENT?.toString()) ?? '';
   }
 
   void setBool(value) async {
@@ -42,7 +43,7 @@ class _EntSettingsPage extends State<EntSettingsPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: const Color(0xff2a3961),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
             future: initPage(),
             builder: (context, snapshot) => Row(
@@ -50,25 +51,7 @@ class _EntSettingsPage extends State<EntSettingsPage> {
               children: [
                 Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: getPercentage(context, "h5")),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                            backgroundColor: const Color(0xff2A3961),
-                            fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9"))
-                        ),
-                        onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const SettingsPage())),
-                        child: Text(
-                          "Retour",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "FeixenVariable",
-                              fontSize: getPercentage(context, "w5")
-                          ),
-                        ),
-                      ),
-                    ),
+                    SizedBox(height: getPercentage(context, "h5")),
                     Text(
                       "Paramètres ENT",
                       style: TextStyle(
@@ -165,7 +148,8 @@ class _EntSettingsPage extends State<EntSettingsPage> {
                         onSubmitted: (String value) async {
                           final SharedPreferences prefs =
                           await SharedPreferences.getInstance();
-                          prefs.setString("pwdENT", value);
+                          prefs.setString("pwdENT", Encrypter.crypt(value));
+                          print(prefs.getString("pwdENT"));
                           Fluttertoast.showToast(
                               msg: "Mot de passe mis à jour !",
                               toastLength: Toast.LENGTH_SHORT,

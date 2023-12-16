@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monlycee/other/crypter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,7 +30,7 @@ class _TurboselfPageState extends State<TurboselfPage> {
     if(url.startsWith("https://espacenumerique.turbo-self.com/Connexion.aspx")) {
       await justWait(200);
       controller.runJavaScript("document.querySelector('#ctl00_cntForm_txtLogin').value = \"$usernameSelf\"");
-      controller.runJavaScript("document.querySelector('#ctl00_cntForm_txtMotDePasse').value = \"$pwdSelf\"");
+      controller.runJavaScript("document.querySelector('#ctl00_cntForm_txtMotDePasse').value = \"${Encrypter.decrypt(pwdSelf)}\"");
       controller.runJavaScript("document.querySelector('#ctl00_cntForm_chkRememberMe').checked = \"checked\"");
       await justWait(200);
       controller.runJavaScript("document.querySelector('#ctl00_cntForm_btnConnexion').click()");
@@ -63,7 +64,7 @@ class _TurboselfPageState extends State<TurboselfPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: const Color(0xff2a3961),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
           future: getPrefsInstance(),
           builder: (context, snapshot) {

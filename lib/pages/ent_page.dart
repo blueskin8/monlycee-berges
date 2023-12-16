@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monlycee/other/crypter.dart';
 import 'package:monlycee/other/just_wait.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -47,7 +48,7 @@ class _ENTPageState extends State<ENTPage> {
         "document.querySelector('#username').value = \"$usernameENT\"",
       );
       controller.runJavaScript(
-        "document.querySelector('#password').value = \"$pwdENT\"",
+        "document.querySelector('#password').value = \"${Encrypter.decrypt(pwdENT)}\"",
       );
       await justWait(500);
       controller.runJavaScript(
@@ -92,7 +93,7 @@ class _ENTPageState extends State<ENTPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: const Color(0xff2a3961),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         body:  FutureBuilder(
           future: getPrefsInstance(),
           builder: (context, snapshot) {

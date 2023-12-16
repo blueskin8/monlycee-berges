@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:monlycee/other/just_wait.dart';
 import 'package:monlycee/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
@@ -9,7 +10,7 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   runApp(const MonLycee());
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   if(prefs.get("uuid")==null) {
@@ -17,6 +18,10 @@ void main() async {
   }
   if(prefs.get("classe")==null) {
     prefs.setString("classe", "seconde"); // Classe par défaut lors de l'installation de l'application
+  }
+  while (true) {
+    await justWait(1000);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 }
 

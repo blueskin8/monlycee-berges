@@ -16,7 +16,7 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   List<dynamic> releases = [];
 
-  var versions = Padding(padding: EdgeInsets.zero);
+  var versions = const Padding(padding: EdgeInsets.zero);
 
   Future<void> initPage() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -125,7 +125,7 @@ class _NewsPageState extends State<NewsPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         backgroundColor: const Color(0xff2A3961),
         body: FutureBuilder(
           future: initPage(),

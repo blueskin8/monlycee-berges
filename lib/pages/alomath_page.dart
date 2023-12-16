@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monlycee/other/crypter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
@@ -32,7 +33,7 @@ class _AlomathPageState extends State<AlomathPage> {
           "document.querySelector('input[name=\"pseudoconnect\"]').value = \"$usernameAlomath\""
       );
       controller.runJavaScript(
-          "document.querySelector('input[name=\"passwordconnect\"]').value = \"$pwdAlomath\""
+          "document.querySelector('input[name=\"passwordconnect\"]').value = \"${Encrypter.decrypt(pwdAlomath)}\""
       );
       await justWait(200);
       controller.runJavaScript(
@@ -68,7 +69,7 @@ class _AlomathPageState extends State<AlomathPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: const Color(0xff2a3961),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
           future: getPrefsInstance(),
           builder: (context, snapshot) => WebViewWidget(controller: controller),

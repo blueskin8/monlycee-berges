@@ -31,7 +31,7 @@ class _ManuelsPageState extends State<ManuelsPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         backgroundColor: const Color(0xff2a3961),
         body: FutureBuilder(
           future: initPage(),

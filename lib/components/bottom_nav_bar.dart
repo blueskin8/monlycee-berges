@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-// import 'package:monlycee/pages/pass_page.dart';
 import 'package:monlycee/pages/settings_page.dart';
-import 'package:monlycee/pages/turboself_page.dart';
 import 'package:monlycee/pages/home_page.dart';
 import 'package:monlycee/pages/ent_page.dart';
 
 class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({super.key});
+  final BuildContext context;
+  const BottomNavBar({super.key, required this.context});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext currentContext) {
     return BottomAppBar(
        color: const Color(0xff43497D),
        child: Row(
@@ -24,38 +23,13 @@ class BottomNavBar extends StatelessWidget {
                        pageBuilder: (_, __, ___) => const HomePage()));
              },
            ),
-           // IconButton(
-           //   icon: const Icon(Icons.add_card, color: Colors.white),
-           //   onPressed: () {
-           //     Navigator.push(
-           //         context,
-           //         PageRouteBuilder(
-           //             pageBuilder: (_, __, ___) => const PassPage()
-           //         )
-           //     );
-           //   },
-           // ),
            IconButton(
-             icon: const Icon(Icons.open_in_browser, color: Colors.white),
+             icon: const ImageIcon(AssetImage("assets/entIcon.png"), color: Colors.white),
              onPressed: () {
                Navigator.push(context,
-                   PageRouteBuilder(pageBuilder: (_, __, ___) => ENTPage()));
+                   PageRouteBuilder(pageBuilder: (_, __, ___) => const ENTPage()));
              },
            ),
-           IconButton(
-             icon: const Icon(Icons.flatware, color: Colors.white),
-             onPressed: () {
-               Navigator.push(
-                   context,
-                   PageRouteBuilder(
-                       pageBuilder: (_, __, ___) => TurboselfPage()));
-             },
-           ),
-           // IconButton(
-           //   icon: const Icon(Icons.functions, color: Colors.white),
-           //   onPressed: () {
-           //   },
-           // ),
            IconButton(
              icon: const Icon(Icons.settings, color: Colors.white),
              onPressed: () {
@@ -63,6 +37,12 @@ class BottomNavBar extends StatelessWidget {
                    context,
                    PageRouteBuilder(
                        pageBuilder: (_, __, ___) => const SettingsPage()));
+             },
+           ),
+           IconButton(
+             icon: const Icon(Icons.arrow_back, color: Colors.white),
+             onPressed: () {
+              if(Navigator.canPop(context)) { Navigator.pop(context); }
              },
            ),
          ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:monlycee/other/crypter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../components/bottom_nav_bar.dart';
 import '../../other/get_percentage.dart';
-import '../settings_page.dart';
 
 class TurboselfSettingsPage extends StatefulWidget {
   const TurboselfSettingsPage({super.key});
@@ -27,7 +27,7 @@ class _TurboselfSettingsPage extends State<TurboselfSettingsPage> {
 
     autoconnexionSelf = prefs.getBool("autoconnexionSelf") ?? false;
     _controllerUsernameSelf.text = usernameSelf?.toString() ?? '';
-    _controllerPwdSelf.text = pwdSelf?.toString() ?? '';
+    _controllerPwdSelf.text = Encrypter.decrypt(pwdSelf?.toString()) ?? '';
   }
 
   void setBoolSelf(value) async {
@@ -42,7 +42,7 @@ class _TurboselfSettingsPage extends State<TurboselfSettingsPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: const Color(0xff2a3961),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
             future: initPage(),
             builder: (context, snapshot) => Row(
@@ -50,25 +50,7 @@ class _TurboselfSettingsPage extends State<TurboselfSettingsPage> {
               children: [
                 Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: getPercentage(context, "h5")),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                            backgroundColor: const Color(0xff2A3961),
-                            fixedSize: Size(getPercentage(context, "w100"), getPercentage(context, "h9"))
-                        ),
-                        onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const SettingsPage())),
-                        child: Text(
-                          "Retour",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "FeixenVariable",
-                              fontSize: getPercentage(context, "w5")
-                          ),
-                        ),
-                      ),
-                    ),
+                    SizedBox(height: getPercentage(context, "h5")),
                     Text(
                       "Paramètres Turboself",
                       style: TextStyle(
@@ -164,7 +146,7 @@ class _TurboselfSettingsPage extends State<TurboselfSettingsPage> {
                         onSubmitted: (String value) async {
                           final SharedPreferences prefs =
                           await SharedPreferences.getInstance();
-                          prefs.setString("pwdSelf", value);
+                          prefs.setString("pwdSelf", Encrypter.crypt(value));
                           Fluttertoast.showToast(
                               msg: "Mot de passe mis à jour !",
                               toastLength: Toast.LENGTH_SHORT,

@@ -26,114 +26,91 @@ class _GeneralSettingsPage extends State<GeneralSettingsPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: const Color(0xff2a3961),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
-            future: initPage(),
-            builder: (context, snapshot) => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
+          future: initPage(),
+          builder: (context, snapshot) => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  SizedBox(height: getPercentage(context, "h5")),
+                  Text(
+                    "Paramètres généraux",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "FeixenBold",
+                        fontSize: getPercentage(context, "w7")),
+                  ),
+                  SizedBox(height: getPercentage(context, "h2")),
+                  SizedBox(
+                    height: getPercentage(context, "h15"),
+                    child: Row(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              bottom: getPercentage(context, "h5")),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(0)),
-                                backgroundColor: const Color(0xff2A3961),
-                                fixedSize: Size(getPercentage(context, "w100"),
-                                    getPercentage(context, "h9"))),
-                            onPressed: () => Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                    pageBuilder: (context, animation,
-                                            secondaryAnimation) =>
-                                        const SettingsPage())),
-                            child: Text(
-                              "Retour",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "FeixenVariable",
-                                  fontSize: getPercentage(context, "w5")),
-                            ),
-                          ),
-                        ),
                         Text(
-                          "Paramètres généraux",
+                          "Classe",
                           style: TextStyle(
                               color: Colors.white,
-                              fontFamily: "FeixenBold",
-                              fontSize: getPercentage(context, "w7")),
+                              fontFamily: 'FeixenVariable',
+                              fontSize: getPercentage(context, "w5")),
                         ),
-                        SizedBox(height: getPercentage(context, "h2")),
-                        SizedBox(
-                          height: getPercentage(context, "h15"),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Classe",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'FeixenVariable',
-                                    fontSize: getPercentage(context, "w5")),
-                              ),
-                              SizedBox(width: getPercentage(context, "w5")),
-                              DropdownMenu(
-                                initialSelection: classeValue,
-                                onSelected: (String? value) async {
-                                  final SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-                                  setState(() {
-                                    prefs.setString("classe", value!);
-                                  });
-                                },
-                                menuStyle: MenuStyle(
-                                  backgroundColor: const MaterialStatePropertyAll( Color(0xff43497D) ),
-                                  minimumSize: MaterialStatePropertyAll(Size(getPercentage(context, "w40"), 1)),
-                                  maximumSize: MaterialStatePropertyAll(Size(getPercentage(context, "w40"), getPercentage(context, "h50")))
-                                ),
-                                trailingIcon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-                                selectedTrailingIcon: const Icon(Icons.arrow_drop_up, color: Colors.white),
-                                textStyle: TextStyle(
-                                  fontFamily: "FeixenVariable",
-                                  color: Colors.white,
-                                  fontSize: getPercentage(context, "w4")
-                                ),
-                                dropdownMenuEntries: const [
-                                  DropdownMenuEntry(
-                                    value: "seconde",
-                                    label: "Seconde",
-                                    style: ButtonStyle(
-                                      foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
-                                      backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
-                                    )
-                                  ),
-                                  DropdownMenuEntry(
-                                    value: "premiere",
-                                    label: "Première",
-                                    style: ButtonStyle(
-                                        foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
-                                        backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
-                                    )
-                                  ),
-                                  DropdownMenuEntry(
-                                    value: "terminale",
-                                    label: "Terminale",
-                                    style: ButtonStyle(
-                                        foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
-                                        backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
-                                    )
-                                  )
-                                ],
-                              )
-                            ],
+                        SizedBox(width: getPercentage(context, "w5")),
+                        DropdownMenu(
+                          initialSelection: classeValue,
+                          onSelected: (String? value) async {
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            setState(() {
+                              prefs.setString("classe", value!);
+                            });
+                          },
+                          menuStyle: MenuStyle(
+                            backgroundColor: const MaterialStatePropertyAll( Color(0xff43497D) ),
+                            minimumSize: MaterialStatePropertyAll(Size(getPercentage(context, "w40"), 1)),
+                            maximumSize: MaterialStatePropertyAll(Size(getPercentage(context, "w40"), getPercentage(context, "h50")))
                           ),
+                          trailingIcon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+                          selectedTrailingIcon: const Icon(Icons.arrow_drop_up, color: Colors.white),
+                          textStyle: TextStyle(
+                            fontFamily: "FeixenVariable",
+                            color: Colors.white,
+                            fontSize: getPercentage(context, "w4")
+                          ),
+                          dropdownMenuEntries: const [
+                            DropdownMenuEntry(
+                              value: "seconde",
+                              label: "Seconde",
+                              style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
+                                backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
+                              )
+                            ),
+                            DropdownMenuEntry(
+                              value: "premiere",
+                              label: "Première",
+                              style: ButtonStyle(
+                                  foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
+                                  backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
+                              )
+                            ),
+                            DropdownMenuEntry(
+                              value: "terminale",
+                              label: "Terminale",
+                              style: ButtonStyle(
+                                  foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
+                                  backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
+                              )
+                            )
+                          ],
                         )
                       ],
                     ),
-                  ],
-                )),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

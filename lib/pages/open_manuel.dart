@@ -34,7 +34,7 @@ class OpenManuelPage extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: const Color(0xff2a3961),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
           future: getPrefsInstance(),
           builder: (context, snapshot) {

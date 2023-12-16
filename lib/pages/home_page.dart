@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
             darkTheme: ThemeData.dark(),
             home: Scaffold(
                 backgroundColor: const Color(0xff2A3961),
-                bottomNavigationBar: const BottomNavBar(),
+                bottomNavigationBar: BottomNavBar(context: context),
                 body: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: SingleChildScrollView(
