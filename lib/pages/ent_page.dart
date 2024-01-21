@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:monlycee/other/check_internet_connection.dart';
 import 'package:monlycee/other/crypter.dart';
 import 'package:monlycee/other/just_wait.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
+
+import '../other/get_percentage.dart';
 
 class ENTPage extends StatefulWidget {
   const ENTPage({Key? key}) : super(key: key);
@@ -15,6 +18,8 @@ class ENTPage extends StatefulWidget {
 class _ENTPageState extends State<ENTPage> {
 
   WebViewController controller = WebViewController();
+
+  bool internetConnexionAvailable = true;
 
   @override
   void initState() {
@@ -66,6 +71,8 @@ class _ENTPageState extends State<ENTPage> {
 
   Future<void> getPrefsInstance() async {
 
+    internetConnexionAvailable = await checkInternetConnection();
+
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     controller = WebViewController()
@@ -97,7 +104,31 @@ class _ENTPageState extends State<ENTPage> {
         body:  FutureBuilder(
           future: getPrefsInstance(),
           builder: (context, snapshot) {
-            return WebViewWidget(controller: controller);
+            if (internetConnexionAvailable) {
+              return WebViewWidget(controller: controller);
+            }
+            return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.wifi_off,
+                      color: Colors.white,
+                      size: getPercentage(context, "w15"),
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      "Aucune connexion internet",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "FeixenBold",
+                          fontSize: getPercentage(context, "w10")),
+                    ),
+                  ],
+                )
+            );
           },
         ),
       ),

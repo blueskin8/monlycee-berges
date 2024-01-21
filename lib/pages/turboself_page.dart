@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:monlycee/other/check_internet_connection.dart';
 import 'package:monlycee/other/crypter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:monlycee/other/just_wait.dart';
+
+import '../other/get_percentage.dart';
 
 class TurboselfPage extends StatefulWidget {
   const TurboselfPage({Key? key}) : super(key: key);
@@ -14,6 +17,8 @@ class TurboselfPage extends StatefulWidget {
 
 class _TurboselfPageState extends State<TurboselfPage> {
   WebViewController controller = WebViewController();
+
+  bool internetConnexionAvailable = true;
 
   @override
   void initState() {
@@ -38,6 +43,7 @@ class _TurboselfPageState extends State<TurboselfPage> {
   }
 
   Future<void> getPrefsInstance() async {
+    internetConnexionAvailable = await checkInternetConnection();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -68,7 +74,31 @@ class _TurboselfPageState extends State<TurboselfPage> {
         body: FutureBuilder(
           future: getPrefsInstance(),
           builder: (context, snapshot) {
-            return WebViewWidget(controller: controller);
+            if (internetConnexionAvailable) {
+              return WebViewWidget(controller: controller);
+            }
+            return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.wifi_off,
+                      color: Colors.white,
+                      size: getPercentage(context, "w15"),
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      "Aucune connexion internet",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "FeixenBold",
+                          fontSize: getPercentage(context, "w10")),
+                    ),
+                  ],
+                )
+            );
           },
         ),
       ),

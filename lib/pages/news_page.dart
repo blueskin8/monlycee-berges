@@ -25,19 +25,22 @@ class _NewsPageState extends State<NewsPage> {
       if(jsonDecode(res.body)["message"].startsWith("API rate limit")) {
         versions = Padding(
           padding: EdgeInsets.zero,
-          child: Center(
-            child: SizedBox(
-              width: getPercentage(context, "w90"),
-              child: Text(
-                "Limite de requête de l'API GitHub atteinte, veillez réessayer plus tard.",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: "FeixenVariable",
-                    fontSize: getPercentage(context, "w10")
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: getPercentage(context, "w90"),
+                child: Text(
+                  "Limite de requête de l'API GitHub atteinte, veillez réessayer plus tard.",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "FeixenVariable",
+                      fontSize: getPercentage(context, "w10")
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
-            ),
+            ],
           ),
         );
       }
@@ -74,7 +77,7 @@ class _NewsPageState extends State<NewsPage> {
                   ),
                   SizedBox(height: getPercentage(context, "h2")),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       release["body"],
                       style: TextStyle(

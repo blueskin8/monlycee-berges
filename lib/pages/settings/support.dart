@@ -116,6 +116,7 @@ class _SupportSettingsPageState extends State<SupportSettingsPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
+                  SizedBox(height: getPercentage(context, "h5")),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 90,
                     child: TextField(
@@ -160,23 +161,6 @@ class _SupportSettingsPageState extends State<SupportSettingsPage> {
                           sendMessage()
                         }
                     },
-                  ),
-                  SizedBox(height: getPercentage(context, "h2")),
-                  Text(
-                    "MonLycée | Version v$version",
-                    style: TextStyle(
-                        color: Colors.white30,
-                        fontFamily: "FeixenVariable",
-                        fontSize: getPercentage(context, "w4")
-                    ),
-                  ),
-                  Text(
-                    "ID du client: $idclient",
-                    style: TextStyle(
-                        color: Colors.white30,
-                        fontFamily: "FeixenVariable",
-                        fontSize: getPercentage(context, "w3")
-                    ),
                   ),
                   SizedBox(height: getPercentage(context, "h5"))
                 ],

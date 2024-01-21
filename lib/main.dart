@@ -11,7 +11,9 @@ void main() async {
 
   runApp(const MonLycee());
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  if(!prefs.getBool("unlockScreenRotation")!) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  }
 
   if(prefs.get("uuid")==null) {
     prefs.setString("uuid", const Uuid().v4());

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:monlycee/components/settings_button.dart';
 import 'package:monlycee/pages/settings/about.dart';
 import 'package:monlycee/pages/settings/alomath.dart';
+import 'package:monlycee/pages/settings/beta.dart';
 import 'package:monlycee/pages/settings/ent.dart';
 import 'package:monlycee/pages/settings/general.dart';
 import 'package:monlycee/pages/settings/support.dart';
@@ -54,7 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             fontFamily: "FeixenBold",
                             fontSize: getPercentage(context, "w15")),
                       ),
-                      SizedBox(height: getPercentage(context, "h7")),
+                      SizedBox(height: getPercentage(context, "h5")),
                       const SettingsButton(
                           buttonText: "Général",
                           targetPageInstance: GeneralSettingsPage(),
@@ -72,11 +73,14 @@ class _SettingsPageState extends State<SettingsPage> {
                           buttonText: "Support",
                           targetPageInstance: SupportSettingsPage()),
                       const SettingsButton(
+                          buttonText: "Bêta",
+                          targetPageInstance: BetaSettingsPage()),
+                      const SettingsButton(
                         buttonText: "À propos",
                         targetPageInstance: AboutSettingsPage(),
                         styleSheet: SettingsButtonStyleSheet(borderBottom: 1),
                       ),
-                      SizedBox(height: getPercentage(context, "h3")),
+                      SizedBox(height: getPercentage(context, "h5")),
                       Row(
                         children: [
                           IconButton(

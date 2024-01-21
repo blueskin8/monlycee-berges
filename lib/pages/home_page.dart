@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:monlycee/other/check_internet_connection.dart';
 import 'package:monlycee/pages/manuels_page.dart';
 import 'package:monlycee/pages/mtag_page.dart';
 import 'package:monlycee/pages/ent_page.dart';
@@ -26,8 +27,12 @@ class _HomePageState extends State<HomePage> {
   bool updateAvailable = false;
   bool showMore = false;
 
+  bool internetConnectionAvailable = true;
+
   String latestVersion = "";
   String versionDescription = "";
+
+  String status = "Une nouvelle version est disponible";
 
   @override
   Widget build(BuildContext context) {
@@ -70,17 +75,36 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: getPercentage(context, "h3")
                               ),
                             ), // Text Aristide Bergès
-                            SizedBox(height: getPercentage(context, "h6")),
+                            SizedBox(height: getPercentage(context, "h5")),
                             if(updateAvailable) SizedBox(
                               height: 25,
                               child: ElevatedButton(
                                 onPressed: () async {
                                   try {
                                     GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')).then((release) => {
-                                      OtaUpdate().execute(release.assets?[0].browserDownloadUrl as String)
+                                      OtaUpdate().execute(release.assets?[0].browserDownloadUrl as String).listen((event) {
+                                        String st = event.status.toString();
+                                        print(st);
+                                        if(st.contains("DOWNLOADING")) {
+                                          setState(() {
+                                            status = "Téléchargement...";
+                                          });
+                                        }
+                                        if(st.contains("INSTALLING")) {
+                                          setState(() {
+                                            status = "Installation...";
+                                          });
+                                        }
+                                        if(st.contains("STREAM CLOSED")) {
+                                          setState(() {
+                                            status = "Une nouvelle version est disponible";
+                                          });
+                                        }
+                                      })
                                     });
                                   } catch (err) {
                                     debugPrint("une erreur est survenue lors de la maj auto");
+                                    status = "";
                                     Fluttertoast.showToast(msg: "Une erreur est survenue lors de la mise à jour");
                                   }
                                 },
@@ -92,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 ),
                                 child: Text(
-                                  "Une nouvelle version est disponible",
+                                  status,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "FeixenVariable",
@@ -101,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: getPercentage(context, "h2")),
+                            const SizedBox(height: 14),
                             Row(
                               children: [
                                 Padding(
@@ -172,15 +196,15 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(height: getPercentage(context, "h5")),
-                            Container(
+                            if(internetConnectionAvailable) Container(
                               width: getPercentage(context, "w86") + 14,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: const Color(0xff43497D),
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 1
-                                )
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: const Color(0xff43497D),
+                                  border: Border.all(
+                                      color: Colors.white,
+                                      width: 1
+                                  )
                               ),
                               child: Column(
                                 children: [
@@ -200,24 +224,24 @@ class _HomePageState extends State<HomePage> {
                                     child: Text(
                                       versionDescription!="" ? versionDescription : "Chargement...",
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "FeixenVariable",
-                                        fontSize: getPercentage(context, "w4")
+                                          color: Colors.white,
+                                          fontFamily: "FeixenVariable",
+                                          fontSize: getPercentage(context, "w4")
                                       ),
                                     ),
                                   ),
                                   const SizedBox(height: 14),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      fixedSize: Size(getPercentage(context, "w80"), 15),
-                                      backgroundColor: const Color(0xff43497D),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(9),
-                                        side: const BorderSide(
-                                          color: Colors.white,
-                                          width: 1
+                                        fixedSize: Size(getPercentage(context, "w80"), 15),
+                                        backgroundColor: const Color(0xff43497D),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(9),
+                                            side: const BorderSide(
+                                                color: Colors.white,
+                                                width: 1
+                                            )
                                         )
-                                      )
                                     ),
                                     onPressed: () {
                                       Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => NewsPage()));
@@ -225,9 +249,9 @@ class _HomePageState extends State<HomePage> {
                                     child: Text(
                                       "En savoir plus",
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "FeixenVariable",
-                                        fontSize: getPercentage(context, "w5")
+                                          color: Colors.white,
+                                          fontFamily: "FeixenVariable",
+                                          fontSize: getPercentage(context, "w5")
                                       ),
                                     ),
                                   ),
@@ -235,7 +259,33 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 14)
+                            if(!internetConnectionAvailable) Container(
+                              width: getPercentage(context, "w86") + 14,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: const Color(0xff43497D),
+                                  border: Border.all(
+                                      color: Colors.white,
+                                      width: 1
+                                  )
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 15),
+                                    child: Text(
+                                      "Aucune connexion internet",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "FeixenBold",
+                                          fontSize: getPercentage(context, "w5")
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: getPercentage(context, "h5"))
                           ],
                         ),
                       ],
@@ -251,6 +301,8 @@ class _HomePageState extends State<HomePage> {
   Future<void> initPage() async {
     WidgetsFlutterBinding.ensureInitialized();
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    internetConnectionAvailable = await checkInternetConnection();
 
     Release latestRelease = (await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')));
 

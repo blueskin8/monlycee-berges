@@ -58,7 +58,7 @@ class _TurboselfSettingsPage extends State<TurboselfSettingsPage> {
                           fontFamily: "FeixenBold",
                           fontSize: getPercentage(context, "w7")),
                     ),
-                    SizedBox(height: getPercentage(context, "h2")),
+                    SizedBox(height: getPercentage(context, "h5")),
                     ElevatedButton(
                       onPressed: () {
                         if(autoconnexionSelf) {
