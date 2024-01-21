@@ -8,7 +8,8 @@ import 'package:monlycee/pages/turboself_page.dart';
 import 'package:monlycee/pages/settings_page.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
-import 'package:ota_update/ota_update.dart';
+// import 'package:ota_update/ota_update.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:package_info/package_info.dart';
 import 'package:github/github.dart';
 import 'package:monlycee/pages/alomath_page.dart';
@@ -81,26 +82,15 @@ class _HomePageState extends State<HomePage> {
                               child: ElevatedButton(
                                 onPressed: () async {
                                   try {
-                                    GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')).then((release) => {
-                                      OtaUpdate().execute(release.assets?[0].browserDownloadUrl as String).listen((event) {
-                                        String st = event.status.toString();
-                                        print(st);
-                                        if(st.contains("DOWNLOADING")) {
-                                          setState(() {
-                                            status = "Téléchargement...";
-                                          });
-                                        }
-                                        if(st.contains("INSTALLING")) {
-                                          setState(() {
-                                            status = "Installation...";
-                                          });
-                                        }
-                                        if(st.contains("STREAM CLOSED")) {
-                                          setState(() {
-                                            status = "Une nouvelle version est disponible";
-                                          });
-                                        }
-                                      })
+                                    GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')).then((release) async {
+                                      // release.assets?[0].browserDownloadUrl as String
+                                      final taskID = await FlutterDownloader.enqueue(url: release.assets?[0].browserDownloadUrl as String, savedDir: "/", showNotification: true);
+                                      // await FlutterDownloader.registerCallback((id, status, progress) {
+                                      //   print(id);
+                                      //   print(status);
+                                      //   print(progress);
+                                      // });
+                                      await FlutterDownloader.loadTasks();
                                     });
                                   } catch (err) {
                                     debugPrint("une erreur est survenue lors de la maj auto");
