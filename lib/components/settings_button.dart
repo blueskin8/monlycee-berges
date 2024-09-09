@@ -54,7 +54,7 @@ class SettingsButton extends StatelessWidget {
         onPressed: () => onPress != null ? onPress!(context, targetPageInstance) : _defaultOnPress(context, targetPageInstance),
         style: ElevatedButton.styleFrom(
             fixedSize: Size(getPercentage(percentageRefContext ?? context, styleSheet.buttonWidth), getPercentage(percentageRefContext ?? context, styleSheet.buttonHeight)),
-            backgroundColor: const Color(0xff2A3961),
+            backgroundColor: const Color(0xff1e202b),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0)
             )

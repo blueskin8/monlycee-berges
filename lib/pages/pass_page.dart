@@ -20,7 +20,7 @@ class _PassPageState extends State<PassPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        backgroundColor: const Color(0xff2A3961),
+        backgroundColor: const Color(0xff1e202b),
         bottomNavigationBar: BottomNavBar(context: context),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,

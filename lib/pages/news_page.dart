@@ -58,7 +58,7 @@ class _NewsPageState extends State<NewsPage> {
               width: getPercentage(context, "w86") + 14,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: const Color(0xff43497D),
+                  color: const Color(0xff2b2c39),
                   border: Border.all(
                       color: Colors.white,
                       width: 1
@@ -91,7 +91,7 @@ class _NewsPageState extends State<NewsPage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         fixedSize: Size(getPercentage(context, "w80"), 15),
-                        backgroundColor: const Color(0xff43497D),
+                        backgroundColor: const Color(0xff2b2c39),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(9),
                             side: const BorderSide(
@@ -129,7 +129,7 @@ class _NewsPageState extends State<NewsPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         bottomNavigationBar: BottomNavBar(context: context),
-        backgroundColor: const Color(0xff2A3961),
+        backgroundColor: const Color(0xff1e202b),
         body: FutureBuilder(
           future: initPage(),
           builder: (context, snapshot) {

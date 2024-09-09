@@ -15,7 +15,6 @@ class HomeButtonStyleSheet {
   });
 }
 
-
 class HomeButton extends StatelessWidget {
   final String buttonText;
   final String imageLogoPath;
@@ -46,7 +45,7 @@ class HomeButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.only(left: getPercentage(percentageRefContext ?? context, "w4")),
-        backgroundColor: const Color(0xff43497D),
+        backgroundColor: const Color(0xff2b2c39),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
           side: const BorderSide(color: Colors.white, width: 1),

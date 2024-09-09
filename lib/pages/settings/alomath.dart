@@ -42,7 +42,7 @@ class _AlomathSettingsPage extends State<AlomathSettingsPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        backgroundColor: const Color(0xff2a3961),
+        backgroundColor: const Color(0xff1e202b),
         bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
             future: initPage(),
@@ -78,7 +78,7 @@ class _AlomathSettingsPage extends State<AlomathSettingsPage> {
                           style: ElevatedButton.styleFrom(
                               fixedSize: Size(getPercentage(context, "w80"),
                                   getPercentage(context, "h5")),
-                              backgroundColor: const Color(0xff2A3961),
+                              backgroundColor: const Color(0xff1e202b),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(9),
                               )

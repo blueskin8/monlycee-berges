@@ -25,7 +25,7 @@ class _GeneralSettingsPage extends State<GeneralSettingsPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        backgroundColor: const Color(0xff2a3961),
+        backgroundColor: const Color(0xff1e202b),
         bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
           future: initPage(),
@@ -64,10 +64,9 @@ class _GeneralSettingsPage extends State<GeneralSettingsPage> {
                               prefs.setString("classe", value!);
                             });
                           },
-                          menuStyle: MenuStyle(
-                            backgroundColor: const MaterialStatePropertyAll( Color(0xff43497D) ),
-                            minimumSize: MaterialStatePropertyAll(Size(getPercentage(context, "w40"), 1)),
-                            maximumSize: MaterialStatePropertyAll(Size(getPercentage(context, "w40"), getPercentage(context, "h50")))
+                          width: getPercentage(context, "w40"),
+                          menuStyle: const MenuStyle(
+                            backgroundColor: WidgetStatePropertyAll( Color(0xff2b2c39) ),
                           ),
                           trailingIcon: const Icon(Icons.arrow_drop_down, color: Colors.white),
                           selectedTrailingIcon: const Icon(Icons.arrow_drop_up, color: Colors.white),
@@ -81,24 +80,24 @@ class _GeneralSettingsPage extends State<GeneralSettingsPage> {
                               value: "seconde",
                               label: "Seconde",
                               style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
-                                backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
+                                foregroundColor: WidgetStatePropertyAll( Color(0xffffffff) ),
+                                backgroundColor: WidgetStatePropertyAll( Color(0xff2b2c39) )
                               )
                             ),
                             DropdownMenuEntry(
                               value: "premiere",
                               label: "Première",
                               style: ButtonStyle(
-                                  foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
-                                  backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
+                                  foregroundColor: WidgetStatePropertyAll( Color(0xffffffff) ),
+                                  backgroundColor: WidgetStatePropertyAll( Color(0xff2b2c39) )
                               )
                             ),
                             DropdownMenuEntry(
                               value: "terminale",
                               label: "Terminale",
                               style: ButtonStyle(
-                                  foregroundColor: MaterialStatePropertyAll( Color(0xffffffff) ),
-                                  backgroundColor: MaterialStatePropertyAll( Color(0xff43497D) )
+                                  foregroundColor: WidgetStatePropertyAll( Color(0xffffffff) ),
+                                  backgroundColor: WidgetStatePropertyAll( Color(0xff2b2c39) )
                               )
                             )
                           ],

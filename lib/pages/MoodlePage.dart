@@ -8,14 +8,14 @@ import 'package:monlycee/other/just_wait.dart';
 
 import '../other/get_percentage.dart';
 
-class TurboselfPage extends StatefulWidget {
-  const TurboselfPage({Key? key}) : super(key: key);
+class MoodlePage extends StatefulWidget {
+  const MoodlePage({Key? key}) : super(key: key);
 
   @override
-  _TurboselfPageState createState() => _TurboselfPageState();
+  _MoodlePageState createState() => _MoodlePageState();
 }
 
-class _TurboselfPageState extends State<TurboselfPage> {
+class _MoodlePageState extends State<MoodlePage> {
   WebViewController controller = WebViewController();
 
   bool internetConnexionAvailable = true;

@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../components/bottom_nav_bar.dart';
 import '../../other/get_percentage.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class AboutSettingsPage extends StatefulWidget {
   const AboutSettingsPage({super.key});
@@ -29,7 +29,7 @@ class _AboutSettingsPage extends State<AboutSettingsPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        backgroundColor: const Color(0xff2a3961),
+        backgroundColor: const Color(0xff1e202b),
         bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
             future: initPage(),
@@ -84,10 +84,10 @@ class _AboutSettingsPage extends State<AboutSettingsPage> {
                     SizedBox(
                       width: getPercentage(context, "w85"),
                       child: Text(
-                        "L'application MonLycée à été développée par Alban GARCIA avec l'aide de LaFouine-38 du lycée Aristide Bergès.",
+                        "Développeurs : Alban Garcia et LaFouine-38",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.white60,
                           fontFamily: "FeixenVariable",
                           fontSize: getPercentage(context, "w5")
                         ),
@@ -97,10 +97,10 @@ class _AboutSettingsPage extends State<AboutSettingsPage> {
                     SizedBox(
                       width: getPercentage(context, "w85"),
                       child: Text(
-                        "Voici un autre projet que nous avons développé :",
+                        "Autre projet :",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.white60,
                           fontFamily: "FeixenVariable",
                           fontSize: getPercentage(context, "w5")
                         ),
@@ -113,7 +113,11 @@ class _AboutSettingsPage extends State<AboutSettingsPage> {
                           "Better ENT",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.white60,
+                            decoration: TextDecoration.underline,
+                            decorationStyle: TextDecorationStyle.solid,
+                            fontStyle: FontStyle.italic,
+                            decorationColor: Colors.white60,
                             fontFamily: "FeixenVariable",
                             fontSize: getPercentage(context, "w5")
                           ),

@@ -29,7 +29,7 @@ import '../other/get_percentage.dart';
 //       title: "Mon lycée",
 //       darkTheme: ThemeData.dark(),
 //       home: Scaffold(
-//         backgroundColor: const Color(0xff2a3961),
+//         backgroundColor: const Color(0xff1e202b),
 //         bottomNavigationBar: BottomNavBar(context: context),
 //         body: WebViewWidget(controller: controller)
 //       ),
@@ -77,7 +77,7 @@ class _MTagPageState extends State<MTagPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-          backgroundColor: const Color(0xff2a3961),
+          backgroundColor: const Color(0xff1e202b),
           bottomNavigationBar: BottomNavBar(context: context),
           body: FutureBuilder(
             future: getPrefsInstance(),

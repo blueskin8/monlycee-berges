@@ -74,7 +74,7 @@ class _AlomathPageState extends State<AlomathPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        backgroundColor: const Color(0xff2a3961),
+        backgroundColor: const Color(0xff1e202b),
         bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
           future: getPrefsInstance(),

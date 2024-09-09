@@ -10,20 +10,32 @@ void main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   runApp(const MonLycee());
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  if(!prefs.getBool("unlockScreenRotation")!) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  if (!prefs.getBool("unlockScreenRotation")!) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   }
 
-  if(prefs.get("uuid")==null) {
+  if (prefs.get("uuid") == null) {
     prefs.setString("uuid", const Uuid().v4());
   }
-  if(prefs.get("classe")==null) {
-    prefs.setString("classe", "seconde"); // Classe par défaut lors de l'installation de l'application
+  if (prefs.get("classe") == null) {
+    prefs.setString("classe",
+        "seconde"); // Classe par défaut lors de l'installation de l'application
   }
-  while (true) {
-    await justWait(1000);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.bottom
+  ]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      systemNavigationBarColor: const Color(0xff1f202b),
+      systemNavigationBarDividerColor: const Color(0xaaffffff)));
+  while(true) {
+    justWait(1000);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.bottom
+    ]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+        systemNavigationBarColor: const Color(0xff1f202b),
+        systemNavigationBarDividerColor: const Color(0xaaffffff)));
   }
 }
 

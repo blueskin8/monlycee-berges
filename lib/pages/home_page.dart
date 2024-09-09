@@ -9,7 +9,7 @@ import 'package:monlycee/pages/settings_page.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import 'package:monlycee/other/get_percentage.dart';
 import 'package:ota_update/ota_update.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:github/github.dart';
 import 'package:monlycee/pages/alomath_page.dart';
 import 'package:monlycee/pages/news_page.dart';
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             title: "Mon lycée",
             darkTheme: ThemeData.dark(),
             home: Scaffold(
-                backgroundColor: const Color(0xff2A3961),
+                backgroundColor: const Color(0xff1e202b),
                 bottomNavigationBar: BottomNavBar(context: context),
                 body: SizedBox(
                   width: MediaQuery.of(context).size.width,
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xff678FFF),
+                                    backgroundColor: const Color(0xff57586b),
                                     fixedSize: Size(getPercentage(context, "w86") + 14, 10),
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8)
@@ -166,7 +166,20 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ],
                                 ), // Ligne de boutons 3
-                                const SizedBox(height: 14)
+                                const SizedBox(height: 14),
+                                // Row(
+                                //   children: [
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(right: 7, left: 7),
+                                //       child: HomeButton(buttonText: "Moodle", imageLogoPath: "assets/moodle-logo.png", targetPageInstance: MoodlePage(), percentageRefContext: context),
+                                //     ),
+                                //     // Padding(
+                                //     //   padding: const EdgeInsets.only(right: 7, left: 7),
+                                //     //   child: HomeButton(buttonText: "Alomath", imageLogoPath: "assets/alomath.png", targetPageInstance: AlomathPage(), percentageRefContext: context),
+                                //     // ),
+                                //   ],
+                                // ), // Ligne de boutons 4
+                                // const SizedBox(height: 14)
                               ],
                             ),
                             SizedBox(
@@ -177,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8)
                                     ),
-                                    backgroundColor: const Color(0xff43497D)
+                                    backgroundColor: const Color(0xff2b2c39)
                                 ),
                                 onPressed: () => {
                                   if(showMore) {
@@ -200,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                               width: getPercentage(context, "w86") + 14,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: const Color(0xff43497D),
+                                  color: const Color(0xff2b2c39),
                                   border: Border.all(
                                       color: Colors.white,
                                       width: 1
@@ -234,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         fixedSize: Size(getPercentage(context, "w80"), 15),
-                                        backgroundColor: const Color(0xff43497D),
+                                        backgroundColor: const Color(0xff2b2c39),
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(9),
                                             side: const BorderSide(
@@ -263,7 +276,7 @@ class _HomePageState extends State<HomePage> {
                               width: getPercentage(context, "w86") + 14,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: const Color(0xff43497D),
+                                  color: const Color(0xff2b2c39),
                                   border: Border.all(
                                       color: Colors.white,
                                       width: 1

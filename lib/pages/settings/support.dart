@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:monlycee/pages/settings_page.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../components/bottom_nav_bar.dart';
 import '../../other/get_percentage.dart';
@@ -97,7 +97,7 @@ class _SupportSettingsPageState extends State<SupportSettingsPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        backgroundColor: const Color(0xff2a3961),
+        backgroundColor: const Color(0xff1e202b),
         bottomNavigationBar: BottomNavBar(context: context),
         body: FutureBuilder(
           future: initPage(),
@@ -143,7 +143,7 @@ class _SupportSettingsPageState extends State<SupportSettingsPage> {
                   SizedBox(height: getPercentage(context, "h1")),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff43497D)),
+                        backgroundColor: const Color(0xff2b2c39)),
                     child: Text(
                       "Envoyer",
                       style: TextStyle(

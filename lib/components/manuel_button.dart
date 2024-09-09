@@ -42,7 +42,7 @@ class ManuelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xff43497D),
+        backgroundColor: const Color(0xff2b2c39),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
           side: const BorderSide(color: Colors.white, width: 1),

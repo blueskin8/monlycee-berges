@@ -32,7 +32,7 @@ class _ManuelsPageState extends State<ManuelsPage> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         bottomNavigationBar: BottomNavBar(context: context),
-        backgroundColor: const Color(0xff2a3961),
+        backgroundColor: const Color(0xff1e202b),
         body: FutureBuilder(
           future: initPage(),
           builder: (context, snapshot) {
@@ -94,18 +94,66 @@ class _ManuelsPageState extends State<ManuelsPage> {
                               )
                             ],
                           ),
+                          const SizedBox(height: 14),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 7, left: 7),
+                                child: ManuelButton(buttonText: "EMC", percentageRefContext: context, manuelUrl: manuels["seconde"]["emc"]),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                       if(classe == "premiere") Column(
                         children: [
-                          Text(
-                            "Aucun manuel publié",
-                            style: TextStyle(
-                              fontFamily: "FeixenVariable",
-                              color: Colors.white,
-                              fontSize: getPercentage(context, "w5")
-                            ),
-                          )
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 7, left: 7),
+                                child: ManuelButton(buttonText: "SPÉ Maths", percentageRefContext: context, manuelUrl: manuels["premiere"]["maths"]),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 7, left: 7),
+                                child: ManuelButton(buttonText: "EMC", percentageRefContext: context, manuelUrl: manuels["premiere"]["emc"]),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 14),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 7, left: 7),
+                                child: ManuelButton(buttonText: "Enseignement Scientifique", percentageRefContext: context, manuelUrl: manuels["premiere"]["es"]),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 7, left: 7),
+                                child: ManuelButton(buttonText: "Histoire", percentageRefContext: context, manuelUrl: manuels["premiere"]["histoire"]),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 14),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 7, left: 7),
+                                child: ManuelButton(buttonText: "Français", percentageRefContext: context, manuelUrl: manuels["premiere"]["francais"]),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 7, left: 7),
+                                child: ManuelButton(buttonText: "SPÉ Physique Chimie", percentageRefContext: context, manuelUrl: manuels["premiere"]["francais"]),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 14),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 7, left: 7),
+                                child: ManuelButton(buttonText: "EMC", percentageRefContext: context, manuelUrl: manuels["premiere"]["emc"]),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                       if(classe == "terminale") Column(
@@ -131,7 +179,7 @@ class _ManuelsPageState extends State<ManuelsPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8)
                               ),
-                              backgroundColor: const Color(0xff43497D)
+                              backgroundColor: const Color(0xff2b2c39)
                           ),
                           child: const Text(
                             "Publier un manuel",

@@ -5,6 +5,7 @@ import 'package:monlycee/other/just_wait.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../other/get_percentage.dart';
 
@@ -16,7 +17,6 @@ class ENTPage extends StatefulWidget {
 }
 
 class _ENTPageState extends State<ENTPage> {
-
   WebViewController controller = WebViewController();
 
   bool internetConnexionAvailable = true;
@@ -31,9 +31,10 @@ class _ENTPageState extends State<ENTPage> {
     final pwdENT = prefs.get("pwdENT");
     final autoconnexionENT = prefs.getBool("autoconnexionENT");
 
-    if(autoconnexionENT != true) return;
+    if (autoconnexionENT != true) return;
 
-    if(url.startsWith("https://cas.ent.auvergnerhonealpes.fr/login?service=https%3A%2F%2Faristide-berges.ent.auvergnerhonealpes.fr")) {
+    if (url.startsWith(
+        "https://cas.ent.auvergnerhonealpes.fr/login?service=https%3A%2F%2Faristide-berges.ent.auvergnerhonealpes.fr")) {
       await justWait(200);
       controller.runJavaScript(
         "document.querySelector('#idp-EDU').checked = 'true'",
@@ -43,7 +44,8 @@ class _ENTPageState extends State<ENTPage> {
       );
     }
 
-    if(url.startsWith("https://educonnect.education.gouv.fr/idp/profile/SAML2/POST/SSO")) {
+    if (url.startsWith(
+        "https://educonnect.education.gouv.fr/idp/profile/SAML2/POST/SSO")) {
       await justWait(200);
       controller.runJavaScript(
         "document.querySelector('button#bouton_eleve').click()",
@@ -61,7 +63,8 @@ class _ENTPageState extends State<ENTPage> {
       );
     }
 
-    if(url.startsWith("https://cas.ent.auvergnerhonealpes.fr/saml/SAMLAssertionConsumer")) {
+    if (url.startsWith(
+        "https://cas.ent.auvergnerhonealpes.fr/saml/SAMLAssertionConsumer")) {
       await justWait(200);
       controller.runJavaScript(
         "document.querySelector('div.msg__content > p.p-like > strong > a').click()",
@@ -70,10 +73,11 @@ class _ENTPageState extends State<ENTPage> {
   }
 
   Future<void> getPrefsInstance() async {
-
     internetConnexionAvailable = await checkInternetConnection();
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await Permission.storage.request();
 
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -90,7 +94,8 @@ class _ENTPageState extends State<ENTPage> {
           },
         ),
       )
-      ..loadRequest(Uri.parse("https://aristide-berges.ent.auvergnerhonealpes.fr/sg.do?PROC=PAGE_ACCUEIL"));
+      ..loadRequest(Uri.parse(
+          "https://aristide-berges.ent.auvergnerhonealpes.fr/sg.do?PROC=PAGE_ACCUEIL"));
   }
 
   @override
@@ -99,9 +104,9 @@ class _ENTPageState extends State<ENTPage> {
       title: "Mon lycée",
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        backgroundColor: const Color(0xff2a3961),
+        backgroundColor: const Color(0xff1e202b),
         bottomNavigationBar: BottomNavBar(context: context),
-        body:  FutureBuilder(
+        body: FutureBuilder(
           future: getPrefsInstance(),
           builder: (context, snapshot) {
             if (internetConnexionAvailable) {
@@ -127,8 +132,7 @@ class _ENTPageState extends State<ENTPage> {
                           fontSize: getPercentage(context, "w10")),
                     ),
                   ],
-                )
-            );
+                ));
           },
         ),
       ),
