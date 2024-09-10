@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:monlycee/other/crypter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../components/bottom_nav_bar.dart';
@@ -119,13 +118,9 @@ class _TurboselfSettingsPage extends State<TurboselfSettingsPage> {
                             labelText: "Adresse email",
                             labelStyle: TextStyle(color: Colors.white),
                             fillColor: Colors.white),
-                        onSubmitted: (String value) async {
+                        onChanged: (String value) async {
                           final SharedPreferences prefs = await SharedPreferences.getInstance();
-                          prefs.setString("usernameSelf", value);
-                          Fluttertoast.showToast(
-                              msg: "Adresse email mis à jour !",
-                              toastLength: Toast.LENGTH_SHORT,
-                              timeInSecForIosWeb: 1);
+                            prefs.setString("usernameSelf", value);
                         },
                       ),
                     ),
@@ -143,14 +138,10 @@ class _TurboselfSettingsPage extends State<TurboselfSettingsPage> {
                             labelText: "Mot de passe",
                             labelStyle: TextStyle(color: Colors.white),
                             fillColor: Colors.white),
-                        onSubmitted: (String value) async {
+                        onChanged: (String value) async {
                           final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
+                            await SharedPreferences.getInstance();
                           prefs.setString("pwdSelf", Encrypter.crypt(value));
-                          Fluttertoast.showToast(
-                              msg: "Mot de passe mis à jour !",
-                              toastLength: Toast.LENGTH_SHORT,
-                              timeInSecForIosWeb: 1);
                         },
                       ),
                     ),

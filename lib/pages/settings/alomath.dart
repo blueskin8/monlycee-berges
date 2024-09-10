@@ -123,14 +123,10 @@ class _AlomathSettingsPage extends State<AlomathSettingsPage> {
                                 labelText: "Nom d'utilisateur",
                                 labelStyle: TextStyle(color: Colors.white),
                                 fillColor: Colors.white),
-                            onSubmitted: (String value) async {
+                            onChanged: (String value) async {
                               final SharedPreferences prefs = await SharedPreferences
                                   .getInstance();
                               prefs.setString("usernameAlomath", value);
-                              Fluttertoast.showToast(
-                                  msg: "Nom d'utilisateur mis à jour !",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  timeInSecForIosWeb: 1);
                             },
                           ),
                         ),
@@ -148,15 +144,11 @@ class _AlomathSettingsPage extends State<AlomathSettingsPage> {
                                 labelText: "Mot de passe",
                                 labelStyle: TextStyle(color: Colors.white),
                                 fillColor: Colors.white),
-                            onSubmitted: (String value) async {
+                            onChanged: (String value) async {
                               final SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
+                                  await SharedPreferences.getInstance();
                               prefs.setString("pwdAlomath", Encrypter.crypt(
                                   value));
-                              Fluttertoast.showToast(
-                                  msg: "Mot de passe mis à jour !",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  timeInSecForIosWeb: 1);
                             },
                           ),
                         ),

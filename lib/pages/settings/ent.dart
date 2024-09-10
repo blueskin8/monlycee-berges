@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:monlycee/other/crypter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../components/bottom_nav_bar.dart';
 import '../../other/get_percentage.dart';
-import '../settings_page.dart';
 
 class EntSettingsPage extends StatefulWidget {
   const EntSettingsPage({super.key});
@@ -120,14 +118,10 @@ class _EntSettingsPage extends State<EntSettingsPage> {
                             labelText: "Nom d'utilisateur",
                             labelStyle: TextStyle(color: Colors.white),
                             fillColor: Colors.white),
-                        onSubmitted: (String value) async {
+                        onChanged: (String value) async {
                           final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
+                            await SharedPreferences.getInstance();
                           prefs.setString("usernameENT", value);
-                          Fluttertoast.showToast(
-                              msg: "Nom d'utilisateur mis à jour !",
-                              toastLength: Toast.LENGTH_SHORT,
-                              timeInSecForIosWeb: 1);
                         },
                       ),
                     ),
@@ -145,15 +139,10 @@ class _EntSettingsPage extends State<EntSettingsPage> {
                             labelText: "Mot de passe",
                             labelStyle: TextStyle(color: Colors.white),
                             fillColor: Colors.white),
-                        onSubmitted: (String value) async {
+                        onChanged: (String value) async {
                           final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
+                              await SharedPreferences.getInstance();
                           prefs.setString("pwdENT", Encrypter.crypt(value));
-                          print(prefs.getString("pwdENT"));
-                          Fluttertoast.showToast(
-                              msg: "Mot de passe mis à jour !",
-                              toastLength: Toast.LENGTH_SHORT,
-                              timeInSecForIosWeb: 1);
                         },
                       ),
                     ),

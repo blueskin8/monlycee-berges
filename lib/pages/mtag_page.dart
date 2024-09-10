@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
-
 import '../other/check_internet_connection.dart';
 import '../other/get_percentage.dart';
-//
+
 // class MTagPage extends StatelessWidget {
 //   final WebViewController controller = WebViewController()
 //     ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -58,7 +57,7 @@ class _MTagPageState extends State<MTagPage> {
         },
       ),
     )
-    ..loadRequest(Uri.parse("https://alomath.fr/connexion.php"));
+    ..loadRequest(Uri.parse("https://www.reso-m.fr/8-horaires.html"));
 
   bool internetConnexionAvailable = true;
 
