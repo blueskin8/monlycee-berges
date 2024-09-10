@@ -57,29 +57,71 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       SizedBox(height: getPercentage(context, "h5")),
                       const SettingsButton(
-                          buttonText: "Général",
-                          targetPageInstance: GeneralSettingsPage(),
-                          styleSheet: SettingsButtonStyleSheet(borderTop: 1)),
+                        buttonText: "Général",
+                        icon: Icon(
+                          Icons.settings,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                        targetPageInstance: GeneralSettingsPage(),
+                        styleSheet: SettingsButtonStyleSheet(borderTop: 1),
+                      ),
                       const SettingsButton(
-                          buttonText: "ENT",
-                          targetPageInstance: EntSettingsPage()),
+                        buttonText: "ENT",
+                        icon: Image(
+                          image: AssetImage("assets/entIcon.png"),
+                          width: 30, // Taille adaptée
+                          height: 30,
+                        ),
+                        targetPageInstance: EntSettingsPage(),
+                      ),
                       const SettingsButton(
-                          buttonText: "Turboself",
-                          targetPageInstance: TurboselfSettingsPage()),
+                        buttonText: "Turboself",
+                        icon: Image(
+                          image: AssetImage("assets/turboself_transparent.png"),
+                          width: 30,
+                          height: 30,
+                        ),
+                        targetPageInstance: TurboselfSettingsPage(),
+                      ),
                       const SettingsButton(
-                          buttonText: "Alomath",
-                          targetPageInstance: AlomathSettingsPage()),
+                        buttonText: "Alomath",
+                        icon: Image(
+                          image: AssetImage("assets/pi_trans.png"),
+                          width: 30,
+                          height: 30,
+                        ),
+                        targetPageInstance: AlomathSettingsPage(),
+                      ),
                       const SettingsButton(
-                          buttonText: "Support",
-                          targetPageInstance: SupportSettingsPage()),
+                        buttonText: "Support",
+                        icon: Icon(
+                          size: 30,
+                          Icons.support_agent,
+                          color: Colors.white,
+                        ),
+                        targetPageInstance: SupportSettingsPage(),
+                      ),
                       const SettingsButton(
-                          buttonText: "Bêta",
-                          targetPageInstance: BetaSettingsPage()),
+                        buttonText: "Bêta",
+                        icon: Icon(
+                          Icons.more_horiz,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                        targetPageInstance: BetaSettingsPage(),
+                      ),
                       const SettingsButton(
                         buttonText: "À propos",
+                        icon: Icon(
+                          Icons.info,
+                          size: 30,
+                          color: Colors.white,
+                        ),
                         targetPageInstance: AboutSettingsPage(),
                         styleSheet: SettingsButtonStyleSheet(borderBottom: 1),
                       ),
+
                       SizedBox(height: getPercentage(context, "h5")),
                       Row(
                         children: [

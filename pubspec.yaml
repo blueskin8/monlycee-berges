@@ -81,6 +81,8 @@ flutter:
     - assets/github.png
     - assets/ent.png
     - assets/entIcon.png
+    - assets/turboself_transparent.png
+    - assets/pi_trans.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
