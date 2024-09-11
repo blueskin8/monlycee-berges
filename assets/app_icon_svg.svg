@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 198 149.37">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Dégradé_sans_nom_421-3);
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#Dégradé_sans_nom_421-2);
+      }
+
+      .cls-3 {
+        fill: url(#Dégradé_sans_nom_421);
+      }
+    </style>
+    <linearGradient id="Dégradé_sans_nom_421" data-name="Dégradé sans nom 421" x1="78.4" y1="57.86" x2="189.37" y2="57.86" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3f8cff"/>
+      <stop offset="0" stop-color="#3f8cff"/>
+      <stop offset="0" stop-color="#3f51ff"/>
+      <stop offset=".29" stop-color="#2679ff"/>
+      <stop offset=".59" stop-color="#119dff"/>
+      <stop offset=".84" stop-color="#04b3ff"/>
+      <stop offset="1" stop-color="#0bf"/>
+    </linearGradient>
+    <linearGradient id="Dégradé_sans_nom_421-2" data-name="Dégradé sans nom 421" x1="0" y1="110.4" x2="137.18" y2="110.4" xlink:href="#Dégradé_sans_nom_421"/>
+    <linearGradient id="Dégradé_sans_nom_421-3" data-name="Dégradé sans nom 421" x1="44.65" y1="140.95" x2="198" y2="140.95" xlink:href="#Dégradé_sans_nom_421"/>
+  </defs>
+  <g id="Calque_2-2" data-name="Calque 2">
+    <g>
+      <polygon class="cls-3" points="78.4 58.88 92.85 67.94 119.38 21.57 174.27 115.72 189.37 106.88 127.18 0 111.9 0 78.4 58.88"/>
+      <path class="cls-2" d="m124.24,71.5l12.94,11.43s-38.72,45.62-88.65,7.98c-.12-.09-33.81,58.38-33.81,58.38l-14.72-8.22,39.47-67.85h15.53s30.74,36.56,69.24-1.73Z"/>
+      <rect class="cls-1" x="44.65" y="132.54" width="153.35" height="16.82"/>
+    </g>
+  </g>
+</svg>

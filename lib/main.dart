@@ -18,6 +18,9 @@ void main() async {
   if (prefs.get("uuid") == null) {
     prefs.setString("uuid", const Uuid().v4());
   }
+  if (prefs.get("dataEco") == null) {
+    prefs.setBool("dataEco", false);
+  }
   if (prefs.get("classe") == null) {
     prefs.setString("classe",
         "seconde"); // Classe par défaut lors de l'installation de l'application

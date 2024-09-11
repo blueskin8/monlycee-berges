@@ -14,6 +14,8 @@ import 'package:github/github.dart';
 import 'package:monlycee/pages/alomath_page.dart';
 import 'package:monlycee/pages/news_page.dart';
 import 'package:monlycee/components/home_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,10 +31,64 @@ class _HomePageState extends State<HomePage> {
 
   bool internetConnectionAvailable = true;
 
+  bool dataEco = false;
+
   String latestVersion = "";
   String versionDescription = "";
 
   String status = "Une nouvelle version est disponible";
+
+  Future<bool> isConnectedToWifi() async {
+    ConnectivityResult connectivityResult = (await Connectivity().checkConnectivity())[0];
+    if (connectivityResult == ConnectivityResult.wifi) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> initPage() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final bool isCoWifi = await isConnectedToWifi();
+
+    if(isCoWifi) {
+      dataEco = false;
+    } else {
+      dataEco = prefs.getBool("dataEco")!;
+    }
+
+    late Release latestRelease;
+
+    if(!dataEco) {
+      internetConnectionAvailable = await checkInternetConnection();
+
+      latestRelease = (await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')));
+
+      latestVersion = latestRelease.tagName!;
+      versionDescription = latestRelease.body!;
+
+      if(latestVersion == "" && versionDescription == "") {
+        setState(() {
+          latestVersion;
+          versionDescription;
+        });
+      }
+
+      if(!updateAvailable) {
+        String appVersion = "v${packageInfo.version}";
+        debugPrint("Current app version : $appVersion | Latest app version : $latestVersion");
+        if (latestVersion != appVersion) {
+          setState(() {
+            updateAvailable=true;
+          });
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,27 +137,28 @@ class _HomePageState extends State<HomePage> {
                               child: ElevatedButton(
                                 onPressed: () async {
                                   try {
-                                    GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')).then((release) => {
-                                      OtaUpdate().execute(release.assets?[0].browserDownloadUrl as String).listen((event) {
-                                        String st = event.status.toString();
-                                        print(st);
-                                        if(st.contains("DOWNLOADING")) {
-                                          setState(() {
-                                            status = "Téléchargement...";
-                                          });
-                                        }
-                                        if(st.contains("INSTALLING")) {
-                                          setState(() {
-                                            status = "Installation...";
-                                          });
-                                        }
-                                        if(st.contains("STREAM CLOSED")) {
-                                          setState(() {
-                                            status = "Une nouvelle version est disponible";
-                                          });
-                                        }
-                                      })
-                                    });
+                                    if(!dataEco) {
+                                      GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')).then((release) => {
+                                        OtaUpdate().execute(release.assets?[0].browserDownloadUrl as String).listen((event) {
+                                          String st = event.status.toString();
+                                          if(st.contains("DOWNLOADING")) {
+                                            setState(() {
+                                              status = "Téléchargement...";
+                                            });
+                                          }
+                                          if(st.contains("INSTALLING")) {
+                                            setState(() {
+                                              status = "Installation...";
+                                            });
+                                          }
+                                          if(st.contains("STREAM CLOSED")) {
+                                            setState(() {
+                                              status = "Une nouvelle version est disponible";
+                                            });
+                                          }
+                                        })
+                                      });
+                                    }
                                   } catch (err) {
                                     debugPrint("une erreur est survenue lors de la maj auto");
                                     status = "";
@@ -209,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(height: getPercentage(context, "h5")),
-                            if(internetConnectionAvailable) Container(
+                            if(internetConnectionAvailable == !dataEco) Container(
                               width: getPercentage(context, "w86") + 14,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
@@ -257,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     ),
                                     onPressed: () {
-                                      Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => NewsPage()));
+                                      Navigator.push(context, PageRouteBuilder(pageBuilder: (_, __, ___) => const NewsPage()));
                                     },
                                     child: Text(
                                       "En savoir plus",
@@ -269,6 +326,32 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   SizedBox(height: getPercentage(context, "w3"))
+                                ],
+                              ),
+                            ),
+                            if(dataEco) Container(
+                              width: getPercentage(context, "w86") + 14,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: const Color(0xff2b2c39),
+                                  border: Border.all(
+                                      color: Colors.white,
+                                      width: 1
+                                  )
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 15),
+                                    child: Text(
+                                      "Économie de données activées",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "FeixenBold",
+                                          fontSize: getPercentage(context, "w5")
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -309,34 +392,5 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
-  }
-
-  Future<void> initPage() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
-    internetConnectionAvailable = await checkInternetConnection();
-
-    Release latestRelease = (await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')));
-
-    latestVersion = latestRelease.tagName!;
-    versionDescription = latestRelease.body!;
-
-    if(latestVersion == "" && versionDescription == "") {
-      setState(() {
-        latestVersion;
-        versionDescription;
-      });
-    }
-
-    if(!updateAvailable) {
-      String appVersion = "v${packageInfo.version}";
-      debugPrint("Current app version : $appVersion | Latest app version : $latestVersion");
-      if (latestVersion != appVersion) {
-        setState(() {
-          updateAvailable=true;
-        });
-      }
-    }
   }
 }

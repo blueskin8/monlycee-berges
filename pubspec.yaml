@@ -46,6 +46,7 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   flutter_downloader: ^1.11.8
   internet_connection_checker: ^2.0.0
+  connectivity_plus: ^6.0.5
 
 dev_dependencies:
   flutter_test:

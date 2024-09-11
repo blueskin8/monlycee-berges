@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:monlycee/other/check_internet_connection.dart';
 import 'package:monlycee/other/crypter.dart';
@@ -20,9 +21,20 @@ class _TurboselfPageState extends State<TurboselfPage> {
 
   bool internetConnexionAvailable = true;
 
+  bool dataEco = false;
+
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<bool> isConnectedToWifi() async {
+    ConnectivityResult connectivityResult = (await Connectivity().checkConnectivity())[0];
+    if (connectivityResult == ConnectivityResult.wifi) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   void autoconnect(String url, SharedPreferences prefs) async {
@@ -43,8 +55,21 @@ class _TurboselfPageState extends State<TurboselfPage> {
   }
 
   Future<void> getPrefsInstance() async {
-    internetConnexionAvailable = await checkInternetConnection();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final bool isCoWifi = await isConnectedToWifi();
+
+    if(isCoWifi) {
+      dataEco = false;
+    } else {
+      dataEco = prefs.getBool("dataEco")!;
+    }
+    if(!dataEco) {
+      internetConnexionAvailable = await checkInternetConnection();
+    } else {
+      internetConnexionAvailable = true;
+    }
+
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(

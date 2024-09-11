@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:monlycee/other/check_internet_connection.dart';
 import 'package:monlycee/other/crypter.dart';
@@ -5,7 +6,6 @@ import 'package:monlycee/other/just_wait.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../other/get_percentage.dart';
 
@@ -20,6 +20,8 @@ class _ENTPageState extends State<ENTPage> {
   WebViewController controller = WebViewController();
 
   bool internetConnexionAvailable = true;
+
+  bool dataEco = false;
 
   @override
   void initState() {
@@ -72,12 +74,31 @@ class _ENTPageState extends State<ENTPage> {
     }
   }
 
-  Future<void> getPrefsInstance() async {
-    internetConnexionAvailable = await checkInternetConnection();
+  Future<bool> isConnectedToWifi() async {
+    ConnectivityResult connectivityResult = (await Connectivity().checkConnectivity())[0];
+    if (connectivityResult == ConnectivityResult.wifi) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
+  Future<void> getPrefsInstance() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await Permission.storage.request();
+    final bool isCoWifi = await isConnectedToWifi();
+    if(isCoWifi) {
+      dataEco = false;
+    } else {
+      dataEco = prefs.getBool("dataEco")!;
+    }
+    if(!dataEco) {
+      internetConnexionAvailable = await checkInternetConnection();
+    } else {
+      internetConnexionAvailable = true;
+    }
+
+    // await Permission.storage.request();
 
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)

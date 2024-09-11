@@ -1,40 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 import '../other/check_internet_connection.dart';
 import '../other/get_percentage.dart';
-
-// class MTagPage extends StatelessWidget {
-//   final WebViewController controller = WebViewController()
-//     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-//     ..setNavigationDelegate(
-//       NavigationDelegate(
-//         onProgress: (int progress) {},
-//         onPageStarted: (String url) {},
-//         onPageFinished: (String url) {},
-//         onWebResourceError: (WebResourceError error) {},
-//         onNavigationRequest: (NavigationRequest request) {
-//           return NavigationDecision.navigate;
-//         },
-//       ),
-//     )
-//     ..loadRequest(Uri.parse("https://www.tag.fr/8-horaires.htm"));
-//
-//   MTagPage({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: "Mon lycée",
-//       darkTheme: ThemeData.dark(),
-//       home: Scaffold(
-//         backgroundColor: const Color(0xff1e202b),
-//         bottomNavigationBar: BottomNavBar(context: context),
-//         body: WebViewWidget(controller: controller)
-//       ),
-//     );
-//   }
-// }
 
 class MTagPage extends StatefulWidget {
   const MTagPage({Key? key}) : super(key: key);
@@ -61,13 +31,37 @@ class _MTagPageState extends State<MTagPage> {
 
   bool internetConnexionAvailable = true;
 
+  bool dataEco = false;
+
   @override
   void initState() {
     super.initState();
   }
 
+  Future<bool> isConnectedToWifi() async {
+    ConnectivityResult connectivityResult = (await Connectivity().checkConnectivity())[0];
+    if (connectivityResult == ConnectivityResult.wifi) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<void> getPrefsInstance() async {
-    internetConnexionAvailable = await checkInternetConnection();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final bool isCoWifi = await isConnectedToWifi();
+
+    if(isCoWifi) {
+      dataEco = false;
+    } else {
+      dataEco = prefs.getBool("dataEco")!;
+    }
+    if(!dataEco) {
+      internetConnexionAvailable = await checkInternetConnection();
+    } else {
+      internetConnexionAvailable = true;
+    }
   }
 
   @override

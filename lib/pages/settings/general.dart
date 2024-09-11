@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../components/bottom_nav_bar.dart';
 import '../../other/get_percentage.dart';
-import '../settings_page.dart';
 
 class GeneralSettingsPage extends StatefulWidget {
   const GeneralSettingsPage({super.key});
@@ -14,9 +13,17 @@ class GeneralSettingsPage extends StatefulWidget {
 class _GeneralSettingsPage extends State<GeneralSettingsPage> {
   String classeValue = "";
 
+  bool dataEco = false;
+
   Future<void> initPage() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     classeValue = prefs.get("classe")!.toString();
+    dataEco = prefs.getBool("dataEco")!;
+  }
+
+  void setBool(bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("dataEco", value);
   }
 
   @override
@@ -104,7 +111,55 @@ class _GeneralSettingsPage extends State<GeneralSettingsPage> {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if(dataEco) {
+                        setState(() {
+                          dataEco = false;
+                        });
+                        setBool(false);
+                      } else {
+                        setState(() {
+                          dataEco = true;
+                        });
+                        setBool(true);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(getPercentage(context, "w80"), getPercentage(context, "h5")),
+                        backgroundColor: const Color(0xff1e202b),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(9),
+                        )
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                            "Économie de données",
+                            style: TextStyle(
+                                fontFamily: "FeixenVariable",
+                                fontSize: getPercentage(context, "w5"),
+                                color: Colors.white)),
+                        Checkbox(
+                          value: dataEco, onChanged: (bool? value) {
+                          if(dataEco) {
+                            setState(() {
+                              dataEco = false;
+                            });
+                            setBool(false);
+                          } else {
+                            setState(() {
+                              dataEco = true;
+                            });
+                            setBool(true);
+                          }
+                        },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ],
