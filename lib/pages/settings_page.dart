@@ -70,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         buttonText: "ENT",
                         icon: Image(
                           image: AssetImage("assets/entIcon.png"),
-                          width: 30, // Taille adaptée
+                          width: 30,
                           height: 30,
                         ),
                         targetPageInstance: EntSettingsPage(),

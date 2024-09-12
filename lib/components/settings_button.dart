@@ -51,40 +51,38 @@ class SettingsButton extends StatelessWidget {
       ),
       width: getPercentage(percentageRefContext ?? context, styleSheet.buttonWidth),
       height: getPercentage(percentageRefContext ?? context, styleSheet.buttonHeight),
-      child: Row(
-        children: [
-          const SizedBox(width: 20),
-          icon,
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed: () => onPress != null ? onPress!(context, targetPageInstance) : _defaultOnPress(context, targetPageInstance),
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(
-                  getPercentage(percentageRefContext ?? context, styleSheet.buttonWidth) - 70,
-                  getPercentage(percentageRefContext ?? context, styleSheet.buttonHeight)
-              ),
-              backgroundColor: const Color(0xff1e202b),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0),
-              ),
-              alignment: Alignment.centerLeft,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start, // Aligner à gauche
-              children: [
-                Text(
-                  buttonText,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: "FeixenVariable",
-                    fontSize: getPercentage(percentageRefContext ?? context, styleSheet.fontSize),
-                  ),
-                ),
-              ],
-            ),
+      child: ElevatedButton(
+        onPressed: () => onPress != null ? onPress!(context, targetPageInstance) : _defaultOnPress(context, targetPageInstance),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.zero,
+          fixedSize: Size(
+              getPercentage(percentageRefContext ?? context, styleSheet.buttonWidth),
+              getPercentage(percentageRefContext ?? context, styleSheet.buttonHeight)
           ),
-        ],
-      )
+          backgroundColor: const Color(0xff1e202b),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
+          // alignment: Alignment.centerLeft,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(width: 20),
+            icon,
+            const SizedBox(width: 20),
+            Text(
+              buttonText,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "FeixenVariable",
+                fontSize: getPercentage(percentageRefContext ?? context, styleSheet.fontSize),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
