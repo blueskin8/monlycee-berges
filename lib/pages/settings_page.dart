@@ -104,10 +104,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       const SettingsButton(
                         buttonText: "Bêta",
-                        icon: Icon(
-                          Icons.more_horiz,
-                          size: 30,
-                          color: Colors.white,
+                        icon: Image(
+                          image: AssetImage("assets/ballon.png"),
+                          width: 30,
+                          height: 30,
                         ),
                         targetPageInstance: BetaSettingsPage(),
                       ),
