@@ -121,6 +121,7 @@ class _SupportSettingsPageState extends State<SupportSettingsPage> {
                     width: MediaQuery.of(context).size.width - 90,
                     child: TextField(
                       style: const TextStyle(color: Colors.white),
+                      keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
                           labelText: "Email",
                           labelStyle: TextStyle(color: Colors.white),
@@ -131,7 +132,11 @@ class _SupportSettingsPageState extends State<SupportSettingsPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 90,
                     child: TextField(
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: null,
                       style: const TextStyle(color: Colors.white),
+                      autocorrect: true,
                       decoration: const InputDecoration(
                         labelText: "Message",
                         labelStyle: TextStyle(color: Colors.white),
