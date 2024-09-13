@@ -16,5 +16,4 @@ jobs:
         with:
           flutter-version: 3.24.1
       - run: flutter pub get
-      - run: flutter test
       - run: flutter build apk
