@@ -141,7 +141,7 @@ class _ManuelsPageState extends State<ManuelsPage> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 7, left: 7),
-                                child: ManuelButton(buttonText: "SPÉ Physique Chimie", percentageRefContext: context, manuelUrl: manuels["premiere"]["francais"]),
+                                child: ManuelButton(buttonText: "SPÉ Physique Chimie", percentageRefContext: context, manuelUrl: manuels["premiere"]["spc"]),
                               )
                             ],
                           ),
