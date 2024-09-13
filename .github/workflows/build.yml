@@ -1,9 +1,14 @@
 steps:
-  - name: Build
-    uses: actions/checkout@v4
+  - name: Clone repository
+  - uses: actions/checkout@v4
   - name: Set up Flutter
     uses: subosito/flutter-action@v2
+    id: flutter-action
     with:
       channel: stable
-      flutter-version: 3.24.1
-  - run: flutter build apk
+      dry-run: true
+  - run: |
+      # Always print the latest stable version.
+      echo CHANNEL=${{ steps.flutter-action.outputs.CHANNEL }}
+      echo VERSION=${{ steps.flutter-action.outputs.VERSION }}
+    shell: bash
