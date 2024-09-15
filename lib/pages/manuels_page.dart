@@ -115,7 +115,7 @@ class _ManuelsPageState extends State<ManuelsPage> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 7, left: 7),
-                                child: ManuelButton(buttonText: "EMC", percentageRefContext: context, manuelUrl: manuels["premiere"]["emc"]),
+                                child: ManuelButton(buttonText: "Anglais", percentageRefContext: context, manuelUrl: manuels["premiere"]["anglais"]),
                               )
                             ],
                           ),
