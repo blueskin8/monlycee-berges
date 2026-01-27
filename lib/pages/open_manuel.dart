@@ -6,15 +6,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:monlycee/components/bottom_nav_bar.dart';
 
-class OpenManuelPage extends StatelessWidget {
+class OpenManuelPage extends StatefulWidget {
   final String url;
   OpenManuelPage({Key? key, required this.url}) : super(key: key);
 
+  @override
+  _OpenManuelPageState createState() => _OpenManuelPageState();
+}
+
+class _OpenManuelPageState extends State<OpenManuelPage> {
   bool internetConnexionAvailable = true;
-
   bool dataEco = false;
+  late WebViewController controller;
 
-  WebViewController controller = WebViewController();
+  @override
+  void initState() {
+    super.initState();
+    controller = WebViewController();
+    getPrefsInstance();
+  }
+
+  Future<void> retryInternet() async {
+    internetConnexionAvailable = await checkInternetConnection();
+  }
 
   Future<bool> isConnectedToWifi() async {
     ConnectivityResult connectivityResult = (await Connectivity().checkConnectivity())[0];
@@ -29,12 +43,13 @@ class OpenManuelPage extends StatelessWidget {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool isCoWifi = await isConnectedToWifi();
 
-    if(isCoWifi) {
+    if (isCoWifi) {
       dataEco = false;
     } else {
-      dataEco = prefs.getBool("dataEco")!;
+      dataEco = prefs.getBool("dataEco") ?? false;
     }
-    if(!dataEco) {
+
+    if (!dataEco) {
       internetConnexionAvailable = await checkInternetConnection();
     } else {
       internetConnexionAvailable = true;
@@ -53,7 +68,9 @@ class OpenManuelPage extends StatelessWidget {
           },
         ),
       )
-      ..loadRequest(Uri.parse(url));
+      ..loadRequest(Uri.parse(widget.url));
+
+    setState(() {});
   }
 
   @override
@@ -87,10 +104,32 @@ class OpenManuelPage extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: "FeixenBold",
-                      fontSize: getPercentage(context, "w10")),
+                      fontSize: getPercentage(context, "w10"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          retryInternet();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff2b2c39)
+                      ),
+                      child: Text(
+                        "Réessayer",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "FeixenVariable",
+                            fontSize: getPercentage(context, "w5")
+                        ),
+                      ),
+                    ),
                   ),
                 ],
-              )
+              ),
             );
           },
         ),

@@ -37,6 +37,10 @@ class _TurboselfPageState extends State<TurboselfPage> {
     }
   }
 
+  Future<void> retryInternet() async {
+    internetConnexionAvailable = await checkInternetConnection();
+  }
+
   void autoconnect(String url, SharedPreferences prefs) async {
     final usernameSelf = prefs.getString("usernameSelf");
     final pwdSelf = prefs.getString("pwdSelf");
@@ -120,6 +124,27 @@ class _TurboselfPageState extends State<TurboselfPage> {
                           color: Colors.white,
                           fontFamily: "FeixenBold",
                           fontSize: getPercentage(context, "w10")),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            retryInternet();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff2b2c39)
+                        ),
+                        child: Text(
+                          "Réessayer",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "FeixenVariable",
+                              fontSize: getPercentage(context, "w5")
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 )

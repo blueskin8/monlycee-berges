@@ -47,6 +47,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> retryInternet() async {
+    internetConnectionAvailable = await checkInternetConnection();
+  }
+
   Future<void> initPage() async {
     WidgetsFlutterBinding.ensureInitialized();
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -66,24 +70,26 @@ class _HomePageState extends State<HomePage> {
     if(!dataEco) {
       internetConnectionAvailable = await checkInternetConnection();
 
-      latestRelease = (await GitHub().repositories.getLatestRelease(RepositorySlug('blueskin8', 'monlycee-berges')));
+      latestRelease = (await GitHub().repositories.getLatestRelease(
+          RepositorySlug('blueskin8', 'monlycee-berges')));
 
       latestVersion = latestRelease.tagName!;
       versionDescription = latestRelease.body!;
 
-      if(latestVersion == "" && versionDescription == "") {
+      if (latestVersion == "" && versionDescription == "") {
         setState(() {
           latestVersion;
           versionDescription;
         });
       }
 
-      if(!updateAvailable) {
+      if (!updateAvailable) {
         String appVersion = "v${packageInfo.version}";
-        debugPrint("Current app version : $appVersion | Latest app version : $latestVersion");
+        debugPrint(
+            "Current app version : $appVersion | Latest app version : $latestVersion");
         if (latestVersion != appVersion) {
           setState(() {
-            updateAvailable=true;
+            updateAvailable = true;
           });
         }
       }
@@ -378,6 +384,29 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 15),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          retryInternet();
+                                        });
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color(0xff2b2c39),
+                                        side: const BorderSide(
+                                          color: Colors.white,
+                                          width: 1
+                                        )
+                                      ),
+                                      child: const Text(
+                                          "Réessayer",
+                                        style: TextStyle(
+                                          color: Colors.white
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

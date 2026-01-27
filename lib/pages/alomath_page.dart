@@ -50,6 +50,10 @@ class _AlomathPageState extends State<AlomathPage> {
     }
   }
 
+  Future<void> retryInternet() async {
+    internetConnexionAvailable = await checkInternetConnection();
+  }
+
   Future<bool> isConnectedToWifi() async {
     ConnectivityResult connectivityResult = (await Connectivity().checkConnectivity())[0];
     if (connectivityResult == ConnectivityResult.wifi) {
@@ -125,8 +129,29 @@ class _AlomathPageState extends State<AlomathPage> {
                           fontFamily: "FeixenBold",
                           fontSize: getPercentage(context, "w10")),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            retryInternet();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff2b2c39)
+                        ),
+                        child: Text(
+                          "Réessayer",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "FeixenVariable",
+                              fontSize: getPercentage(context, "w5")
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
-                )
+                ),
             );
           },
         )

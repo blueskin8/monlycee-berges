@@ -83,6 +83,10 @@ class _ENTPageState extends State<ENTPage> {
     }
   }
 
+  Future<void> retryInternet() async {
+    internetConnexionAvailable = await checkInternetConnection();
+  }
+
   Future<void> getPrefsInstance() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -134,26 +138,48 @@ class _ENTPageState extends State<ENTPage> {
               return WebViewWidget(controller: controller);
             }
             return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.wifi_off,
-                      color: Colors.white,
-                      size: getPercentage(context, "w15"),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.wifi_off,
+                    color: Colors.white,
+                    size: getPercentage(context, "w15"),
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    "Aucune connexion internet",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "FeixenBold",
+                        fontSize: getPercentage(context, "w10")),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          retryInternet();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff2b2c39)
+                      ),
+                      child: Text(
+                        "Réessayer",
+                        style: TextStyle(
+                            color: Colors.white,
+                          fontFamily: "FeixenVariable",
+                          fontSize: getPercentage(context, "w5")
+                        ),
+                      ),
                     ),
-                    const SizedBox(height: 15),
-                    Text(
-                      "Aucune connexion internet",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "FeixenBold",
-                          fontSize: getPercentage(context, "w10")),
-                    ),
-                  ],
-                ));
+                  ),
+                ],
+              ),
+            );
           },
         ),
       ),
